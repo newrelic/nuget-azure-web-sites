@@ -1,0 +1,9 @@
+# git ignore file
+
+test-results
+Agent/_NCrunch_FullAgent/
+
+#nuget - we want to include complete package contents - dlls, exe, so on
+!nuget/*/lib/*/*.dll
+!nuget/*/content/*
+!nuget/*/content/bin/*

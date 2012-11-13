@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>NewRelicAzureWebSites</id>
+        <version>2.1.0.9</version>
+        <title>New Relic for Windows Azure Web Sites</title>
+        <authors>Nick Floyd</authors>
+        <owners>Nick Floyd</owners>
+        <projectUrl>https://newrelic.com/windowsazure</projectUrl>
+        <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>New Relic for Windows Azure web sites.  This package will install all of the resources needed to profile your Windows Azure web site.  
+
+Make sure you go to New Relic first to sign up and get your key at http://newrelic.com. Performance monitoring will never be the same after you do!</description>
+    </metadata>
+    <files>
+        <file src="content\bin\extensions\CoreInstrumentation.xml" target="content\bin\extensions\CoreInstrumentation.xml" />
+        <file src="content\bin\extensions\extension.xsd" target="content\bin\extensions\extension.xsd" />
+        <file src="content\bin\logs\README.txt" target="content\bin\logs\README.txt" />
+        <file src="content\bin\NewRelic.Agent.Core.dll" target="content\bin\NewRelic.Agent.Core.dll" />
+        <file src="content\bin\NewRelic.Agent.IL.dll" target="content\bin\NewRelic.Agent.IL.dll" />
+        <file src="content\bin\NewRelic.Agent.Messages.dll" target="content\bin\NewRelic.Agent.Messages.dll" />
+        <file src="content\bin\NewRelic.ICSharpCode.SharpZipLib.dll" target="content\bin\NewRelic.ICSharpCode.SharpZipLib.dll" />
+        <file src="content\bin\NewRelic.Json.dll" target="content\bin\NewRelic.Json.dll" />
+        <file src="content\bin\NewRelic.Log.dll" target="content\bin\NewRelic.Log.dll" />
+        <file src="content\newrelic.config" target="content\newrelic.config" />
+        <file src="lib\net40\NewRelic.Api.Agent.dll" target="lib\net40\NewRelic.Api.Agent.dll" />
+        <file src="tools\install.ps1" target="tools\install.ps1" />
+        <file src="tools\NewRelicHelper.psm1" target="tools\NewRelicHelper.psm1" />
+        <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
+    </files>
+</package>

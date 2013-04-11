@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCWebApplication.Fixture", "MVCWebApplication.Fixture\MVCWebApplication.Fixture.csproj", "{EC68EFD0-4C0F-4DA7-B83C-AB497125F17E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCWebApplication.Fixture", "MVCWebApplication.Fixture.csproj", "{EC68EFD0-4C0F-4DA7-B83C-AB497125F17E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

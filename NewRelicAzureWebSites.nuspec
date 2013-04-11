@@ -17,8 +17,8 @@ Make sure you go to New Relic first to sign up and get your key at http://newrel
         <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
         <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
         <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
-        <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
         <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
+        <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
         <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
         <file src="tools\install.ps1" target="tools\install.ps1" />
         <file src="tools\NewRelicHelper.psm1" target="tools\NewRelicHelper.psm1" />

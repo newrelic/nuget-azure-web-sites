@@ -20,24 +20,25 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #}
 
 
-#
+
 #Describe "install" {
 #	Context "when install is run on a web project" {
+#		#NuGet Pack C:\code\nuget\nuget-azure-web-sites\NewRelicAzureWebSites.nuspec
+#		
 #		#Move the web project to temp
-#		#Copy-Item "$PackageRoot\nuget.test\fixtures\MVCWebApplication.Fixture\*" "TestDrive:\"
-#
-#		$solution = "$PackageRoot\nuget.test\fixtures\MVCWebApplication.Fixture\MVCWebApplication.Fixture.sln"
+#		$tempDir = "$PackageRoot\nuget.test\fixtures\temp\MVCWebApplication.Fixture"
+#		Copy-Item "$PackageRoot\nuget.test\fixtures\MVCWebApplication.Fixture\*" $tempDir -recurse
+#		
+#		$solution = "$tempDir\MVCWebApplication.Fixture.sln"
 #		set-project -name MVCWebApplication.Fixture $solution
-#		install-package NewRelicAzureWebSites -Source C:\code\nuget\nuget-azure-web-sites\
+#		install-package NewRelicAzureWebSites -Source C:\code\nuget\nuget-azure-web-sites
 #		
 #		$project = Get-Project -name MVCWebApplication.Fixture
 #
 #		It "verifies install adds newrelic.config" {
-#			(Test-Path $PackageRoot\nuget.test\fixtures\MVCWebApplication.Fixture\MVCWebApplication.Fixture\newrelic.config) | Should Be $true
-#			#uninstall-package NewRelicAzureWebSites -Source C:\code\nuget\nuget-azure-web-sites\
+#			(Test-Path "$tempDir\newrelic\newrelic.config") | Should Be $true
 #		}
-#
-#		It "verifies newrelic.config contains text"
+#		
 #	}
 #	
 #}

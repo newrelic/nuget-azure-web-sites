@@ -3,8 +3,10 @@ param($installPath, $toolsPath, $package, $project)
 Import-Module (Join-Path $toolsPath NewRelicHelper.psm1)
 
 Write-Host "***Updating project items newrelic.config***" -ForegroundColor DarkGreen
-$config = $project.ProjectItems.Item("NewRelic.Config")
+$newrelic = $project.ProjectItems.Item("newrelic")
+$config = $newrelic.ProjectItems.Item("newrelic.config")
 $configPath = $config.Properties.Item("LocalPath").value
+
 [xml] $configXml = Get-Content $configPath
 $ns = @{ e = "urn:newrelic-config" }
 $ns = New-Object Xml.XmlNamespaceManager $configXml.NameTable
@@ -16,6 +18,7 @@ if($configXml -ne $null){
 
 	#Modify NewRelic.config to accept the user's license key input 
 	$licenseKey = create_dialog "License Key" "Please enter in your New Relic license key (optional)"
+	
 	if($licenseKey -ne $null -and $licenseKey.Length -gt 0){
 		$serviceNode = $configXml.configuration.service
 		if($serviceNode -ne $null){

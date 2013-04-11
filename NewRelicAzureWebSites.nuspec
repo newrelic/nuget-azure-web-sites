@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>NewRelicAzureWebSites</id>
-        <version>2.1.0.9</version>
+        <version>2.6.138.0</version>
         <title>New Relic for Windows Azure Web Sites</title>
         <authors>Nick Floyd</authors>
-        <owners>Nick Floyd</owners>
+        <owners>New Relic</owners>
         <projectUrl>https://newrelic.com/windowsazure</projectUrl>
         <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,7 +18,7 @@ Make sure you go to New Relic first to sign up and get your key at http://newrel
         <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
         <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
         <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
-        <file src="content\newrelic.config" target="content\newrelic.config" />
+        <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
         <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
         <file src="tools\install.ps1" target="tools\install.ps1" />
         <file src="tools\NewRelicHelper.psm1" target="tools\NewRelicHelper.psm1" />

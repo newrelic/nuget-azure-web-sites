@@ -45,7 +45,7 @@ if($configXml -ne $null){
 				$appNode.name = $projectName
 			}
 			else{
-			    Write-Host "Application name will not be updated, no new value was provied and a value already exists in the newrelic.config file..."  -ForegroundColor DarkYellow
+			    Write-Host "Application name will not be updated, no new value was provided and a value already exists in the newrelic.config file..."  -ForegroundColor DarkYellow
 			}
 		}
 	}

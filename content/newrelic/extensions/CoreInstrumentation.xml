@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright (c) 2008-2012 New Relic, Inc.  All rights reserved. --><!--
+﻿<?xml version="1.0" encoding="utf-8"?><!-- Copyright (c) 2008-2013 New Relic, Inc.  All rights reserved. --><!--
     When you edit this file, please use an XML aware editor (such as Visual Studio),
     and pair with the companion file extension.xsd to minimize the
     chance of introducing typos that may confuse the agent when it is run.
@@ -6,23 +6,11 @@
 	<instrumentation>
 
 		<!-- Optional for basic traces. -->
-    <!-- This method is reliably called for both web and console apps, and as such is used to bootstrap the New Relic Agent. -->
-    <!-- This method is not special, per-se, but is reliably called early on; other methods might serve the same function. -->
-
-		<!-- Optional for basic traces. -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.RouteDataTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.Routing.RouteCollection">
 				<exactMethodMatcher methodName="GetRouteData" parameters="System.Web.HttpContextBase" />
 			</match>
 		</tracerFactory>
-
-		<!-- Optional for basic traces. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.HttpContextConstructorTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.HttpContext">
-				<exactMethodMatcher methodName=".ctor" />
-			</match>
-		</tracerFactory>
-
 
 		<!-- hook up the request listener -->
 		<!-- Mandatory for basic traces. -->
@@ -129,37 +117,12 @@
 				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" />
 			</match>
 		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.HtmlHeadTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.UI.HtmlControls.HtmlHead">
-				<exactMethodMatcher methodName="RenderChildren" parameters="System.Web.UI.HtmlTextWriter" />
-			</match>
-		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.HtmlBodyTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.UI.HtmlControls.HtmlContainerControl">
-				<exactMethodMatcher methodName="RenderEndTag" parameters="System.Web.UI.HtmlTextWriter" />
-			</match>
-		</tracerFactory>
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.BrowserTagTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.UI.Control">
 				<exactMethodMatcher methodName="RenderControl" parameters="System.Web.UI.HtmlTextWriter" />
 			</match>
 			<match assemblyName="System.Web" className="System.Web.UI.LiteralControl">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
-			</match>
-		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.TemplateParserLiteralTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.UI.TemplateParser">
-				<exactMethodMatcher methodName="ProcessLiteral" />
-			</match>
-		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.HttpResponseEndTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.HttpResponse">
-				<exactMethodMatcher methodName="End" parameters="void" />
 			</match>
 		</tracerFactory>
 
@@ -172,7 +135,7 @@
 
 		<!-- **************************  WEB SERVICES  ***************************** -->
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.SoapLogicalMethodTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.SoapLogicalMethodTracerFactory" transactionNamingPriority="4">
 			<!-- synchronous -->
 			<match assemblyName="System.Web.Services" className="System.Web.Services.Protocols.LogicalMethodInfo">
 				<exactMethodMatcher methodName="Invoke" parameters="System.Object,System.Object[]" />
@@ -183,38 +146,40 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WebServiceMethodTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WebServiceMethodTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="System.Web.Extensions" className="System.Web.Script.Services.WebServiceMethodData">
 				<exactMethodMatcher methodName="CallMethod" />
 			</match>
 		</tracerFactory>
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.SoapHttpClientProtocolTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.SoapHttpClientProtocolTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="System.Web.Services" className="System.Web.Services.Protocols.SoapHttpClientProtocol">
 				<exactMethodMatcher methodName="Invoke" />
 				<exactMethodMatcher methodName="InvokeAsync" />
 			</match>
 		</tracerFactory>
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.HostedHttpRequestAsyncResultTracerFactory">
-			<match assemblyName="System.ServiceModel.Activation" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
-				<exactMethodMatcher methodName="HandleRequest" parameters="void" />
-			</match>
-		</tracerFactory>
-
 		<!-- WCF (Windows Communication Framework) -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ChannelHandlerTracerFactory" transactionNamingPriority="6">
-			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.ChannelHandler">
-				<exactMethodMatcher methodName="HandleRequest" parameters="System.ServiceModel.Channels.RequestContext,System.ServiceModel.OperationContext" />
-			</match>
-		</tracerFactory>
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceModelRequestTracerFactory" transactionNamingPriority="6">
+<!--
+        <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.HostedHttpRequestAsyncResultTracerFactory">
+            <match assemblyName="System.ServiceModel.Activation" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
+                <exactMethodMatcher methodName="HandleRequest" parameters="void" />
+            </match>
+        </tracerFactory>
+
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceModelRequestTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
 				<exactMethodMatcher methodName="HandleRequest" />
 			</match>
 		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceInvocationTracerFactory" transactionNamingPriority="6">
+-->
+        <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ChannelHandlerTracerFactory" transactionNamingPriority="4">
+			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.ChannelHandler">
+				<exactMethodMatcher methodName="HandleRequest" parameters="System.ServiceModel.Channels.RequestContext,System.ServiceModel.OperationContext" />
+			</match>
+		</tracerFactory>
+        
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceInvocationTracerFactory" transactionNamingPriority="4">
 			<!-- synchronous service invocations -->
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.SyncMethodInvoker">
 				<exactMethodMatcher methodName="Invoke" parameters="System.Object,System.Object[],System.Object[]&amp;" />
@@ -237,7 +202,8 @@
 			<match assemblyName="System" className="System.Net.WebClient">
 				<exactMethodMatcher methodName="DownloadData" parameters="System.Uri" />
 				<exactMethodMatcher methodName="DownloadFile" parameters="System.Uri,System.String" />
-				<exactMethodMatcher methodName="DownloadString" parameters="System.Uri" />
+        <exactMethodMatcher methodName="DownloadString" parameters="System.Uri" />
+        <exactMethodMatcher methodName="CompleteWebClientState" />
 			</match>
 		</tracerFactory>
 
@@ -251,18 +217,11 @@
 
   
 
-		<tracerFactory enable="false" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
+		<tracerFactory enable="true" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">
 				<exactMethodMatcher methodName="SerializeHeaders" parameters="void" />
 			</match>
 		</tracerFactory>
-
-		<tracerFactory enable="false" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebResponseTracerFactory">
-			<match assemblyName="System" className="System.Net.HttpWebResponse">
-				<exactMethodMatcher methodName="Close" />
-			</match>
-		</tracerFactory>
-
 		<!-- **************************  DATABASE INSTRUMENTATION  ***************************** -->
 
 		<!-- command methods -->
@@ -405,7 +364,7 @@
 
 
 		<!-- **************************  UMBRACO CMS  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
 			</match>
@@ -417,7 +376,7 @@
 		</tracerFactory>
 
 		<!-- **************************  DotNetNuke CMS  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.DotNetNuke.PageInitTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.DotNetNuke.PageInitTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="DotNetNuke" className="DotNetNuke.Framework.PageBase">
 				<exactMethodMatcher methodName="OnInit" />
 			</match>
@@ -430,7 +389,7 @@
 		</tracerFactory>
 
 		<!-- **************************  Castle MonoRail  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.MonoRail.ActionMethodExecutorTracerFactory" transactionNamingPriority="6">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.MonoRail.ActionMethodExecutorTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="Castle.MonoRail.Framework" className="Castle.MonoRail.Framework.ActionMethodExecutor">
 				<exactMethodMatcher methodName="Execute" />
 			</match>
@@ -440,7 +399,7 @@
 		</tracerFactory>
 
 		<!-- **************************  OpenRasta  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.OpenRasta.OpenRastaHandlerTracerFactory" transactionNamingPriority="4">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.OpenRasta.OpenRastaHandlerTracerFactory" transactionNamingPriority="2">
 			<match assemblyName="OpenRasta.Hosting.AspNet" className="OpenRasta.Hosting.AspNet.OpenRastaHandler">
 				<exactMethodMatcher methodName="GetHandler" />
 			</match>

@@ -21,6 +21,13 @@ if(Test-Path $modulespath){
 	Import-Module $modulespath
 }
 
+$modulespath = $directorypath + '\modules\PETools'
+Write-Host 'Installing module PETools to help with nuget commands from Powershell located at' + $modulespath
+if(Test-Path $modulespath){
+	Write-Host "***Registering the PETools module***"
+	Import-Module $modulespath
+}
+
 Write-Host "***Installing PsGet a dependency for Pester ***"
 (new-object Net.WebClient).DownloadString("http://bit.ly/GetPsGet") | iex
 import-module PsGet

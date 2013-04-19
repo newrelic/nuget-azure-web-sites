@@ -1,8 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?><!-- Copyright (c) 2008-2013 New Relic, Inc.  All rights reserved. --><!--
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) 2008-2013 New Relic, Inc.  All rights reserved. -->
+
+<!--
     When you edit this file, please use an XML aware editor (such as Visual Studio),
     and pair with the companion file extension.xsd to minimize the
     chance of introducing typos that may confuse the agent when it is run.
---><extension xmlns="urn:newrelic-extension">
+-->
+
+<!-- PRIVATE This file is stripped of comments marked PRIVATE and then installed into the extensions directory. -->
+<!-- PRIVATE New Relic Developers should put as much commentary in this file as possible; mark private commentary -->
+<!-- PRIVATE with the word PRIVATE and it will not be seen by the customer! -->
+<!-- PRIVATE Line numbers will not be complete preserved, especially for multi-line comments. -->
+
+<!-- PRIVATE New Relic Developers should modify the source code for the referenced Factory -->
+<!-- PRIVATE with a comment copy of the appropriate instrumentation rule, and keep the two copies reasonably in sync. -->
+
+<extension xmlns="urn:newrelic-extension">
 	<instrumentation>
 
 		<!-- Optional for basic traces. -->
@@ -16,7 +30,7 @@
 		<!-- Mandatory for basic traces. -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.InitModuleTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
-				<exactMethodMatcher methodName="InitModulesCommon" parameters="void" />
+				<exactMethodMatcher methodName="InitModulesCommon"/>
 				<exactMethodMatcher methodName="RegisterEventSubscriptionsWithIIS" />
 			</match>
 		</tracerFactory>
@@ -25,22 +39,22 @@
 		<!-- Mandatory for basic traces. -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ExecutionPipelineStepTracerFactory" level="2" metric="none">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
-				<exactMethodMatcher methodName="ExecuteStep" parameters="IExecutionStep,System.Boolean&amp;" />
+				<exactMethodMatcher methodName="ExecuteStep" parameters="IExecutionStep,System.Boolean&amp;"/>
 			</match>
 			<match assemblyName="System.Web" className="System.Web.HttpApplication+MapHandlerExecutionStep">
-				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" parameters="void" />
+				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute"/>
 			</match>
 		</tracerFactory>
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ReleaseAppInstanceTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
-				<exactMethodMatcher methodName="ReleaseAppInstance" parameters="void" />
+				<exactMethodMatcher methodName="ReleaseAppInstance"/>
 			</match>
 		</tracerFactory>
 
 		<tracerFactory>
 			<match assemblyName="System.Web" className="System.Web.HttpApplication+MaterializeHandlerExecutionStep">
-				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" parameters="void" />
+				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute"/>
 			</match>
 		</tracerFactory>
 
@@ -48,7 +62,7 @@
 		<!-- Mandatory for traces to work. -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.HttpApplicationEndTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.HttpApplicationFactory">
-				<exactMethodMatcher methodName="FireApplicationOnEnd" parameters="void" />
+				<exactMethodMatcher methodName="FireApplicationOnEnd"/>
 			</match>
 		</tracerFactory>
 
@@ -84,18 +98,18 @@
 		<tracerFactory>
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
-				<exactMethodMatcher methodName="PerformPreInit" parameters="void" />
+				<exactMethodMatcher methodName="PerformPreInit"/>
 			</match>
 			<match assemblyName="System.Web" className="System.Web.Compilation.AssemblyBuilder">
-				<exactMethodMatcher methodName="Compile" parameters="void" />
+				<exactMethodMatcher methodName="Compile"/>
 			</match>
 			<match assemblyName="System.Web" className="System.Web.Compilation.BuildManager">
 				<exactMethodMatcher methodName="CompileWebFile" />
 			</match>
 			<match assemblyName="System.Web" className="System.Web.HttpRequest">
-				<exactMethodMatcher methodName="FillInFilesCollection" parameters="void" />
-				<exactMethodMatcher methodName="FillInFormCollection" parameters="void" />
-				<exactMethodMatcher methodName="FillInQueryStringCollection" parameters="void" />
+				<exactMethodMatcher methodName="FillInFilesCollection"/>
+				<exactMethodMatcher methodName="FillInFormCollection"/>
+				<exactMethodMatcher methodName="FillInQueryStringCollection"/>
 			</match>
 		</tracerFactory>
 
@@ -163,7 +177,7 @@
 <!--
         <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.HostedHttpRequestAsyncResultTracerFactory">
             <match assemblyName="System.ServiceModel.Activation" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
-                <exactMethodMatcher methodName="HandleRequest" parameters="void" />
+                <exactMethodMatcher methodName="HandleRequest"/>
             </match>
         </tracerFactory>
 
@@ -203,7 +217,7 @@
 				<exactMethodMatcher methodName="DownloadData" parameters="System.Uri" />
 				<exactMethodMatcher methodName="DownloadFile" parameters="System.Uri,System.String" />
         <exactMethodMatcher methodName="DownloadString" parameters="System.Uri" />
-        <exactMethodMatcher methodName="CompleteWebClientState" />
+        <exactMethodMatcher methodName="CompleteWebClientState"/>
 			</match>
 		</tracerFactory>
 
@@ -215,11 +229,14 @@
 		</tracerFactory>
 
 
-  
+  <!-- PRIVATE HttpWebRequest.SerializeHeaders and HttpWebResponse.Close disabled on 12Mar2012, based on feedback from
+      Ticket http://newrelic.zendesk.com/tickets/8108
+      These tracers generate data to correlate two instrumented apps, but that data is not yet being used.
+  -->
 
 		<tracerFactory enable="true" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">
-				<exactMethodMatcher methodName="SerializeHeaders" parameters="void" />
+				<exactMethodMatcher methodName="SerializeHeaders"/>
 			</match>
 		</tracerFactory>
 		<!-- **************************  DATABASE INSTRUMENTATION  ***************************** -->
@@ -347,17 +364,17 @@
 
 			<!-- Oracle vendor driver -->
 			<match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleConnection">
-				<exactMethodMatcher methodName="Open" parameters="void" />
+				<exactMethodMatcher methodName="Open"/>
 			</match>
 
 			<!-- MySql (official) driver -->
 			<match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlConnection">
-				<exactMethodMatcher methodName="Open" parameters="void" />
+				<exactMethodMatcher methodName="Open"/>
 			</match>
 
 			<!-- Npgsql Postgres data provider -->
 			<match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
-				<exactMethodMatcher methodName="Open" parameters="void" />
+				<exactMethodMatcher methodName="Open"/>
 			</match>
 
 		</tracerFactory>

@@ -4,7 +4,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "2.6.188.0"
+		$agentVersion = "2.6.194.0"
 		
 		Context "When package exists" {
 			It "checks to see if content\newrelic.config exists" {
@@ -70,6 +70,16 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			It "Should have ssl set to true" {
 				$node = $configXml.configuration.service
 				$node.ssl | Should be "true"
+			}
+			
+			It "Should have the directory attribute set on the log element" {
+				$node = $configXml.configuration.log
+				$node.directory | Should be "C:\Home\LogFiles\NewRelic"
+			}
+			
+			It "Should have the level attribute set on the log element set to info" {
+				$node = $configXml.configuration.log
+				$node.level | Should be "info"
 			}
 		}
 		

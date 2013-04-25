@@ -14,20 +14,30 @@ $ns.AddNamespace( "e", "urn:newrelic-config" )
 
 $projectName = $project.Name.ToString()
 
+$extensionFile = $project.ProjectItems.Item("newrelic").ProjectItems.Item("extensions").ProjectItems.Item("extension.xsd")
+if($extensionFile -ne $null){
+	$extensionFile.Properties.Item("BuildAction").Value = 2
+}
+
 if($configXml -ne $null){
 
 	#Modify NewRelic.config to accept the user's license key input 
-	$licenseKey = create_dialog "License Key" "Please enter in your New Relic license key (optional)"
 	
-	if($licenseKey -ne $null -and $licenseKey.Length -gt 0){
-		$serviceNode = $configXml.configuration.service
-		if($serviceNode -ne $null){
+	$serviceNode = $configXml.configuration.service
+	if($serviceNode -ne $null -and $serviceNode.licenseKey -eq "REPLACE_WITH_LICENSE_KEY"){
+		
+		$licenseKey = create_dialog "License Key" "Please enter in your New Relic license key (optional)"
+		
+		if($licenseKey -ne $null -and $licenseKey.Length -gt 0){
 			Write-Host "Updating licensekey in the newrelic.config file..."	 -ForegroundColor DarkGreen
 			$serviceNode.SetAttribute("licenseKey", $licenseKey)
 		}
+		else{
+			Write-Host "No Key was provided, please make sure to edit the newrelic.config file & add a valid New Relic license key before deploying your application." -ForegroundColor DarkYellow
+		}
 	}
 	else{
-		Write-Host "No Key was provided, please make sure to edit the newrelic.config file & add a valid New Relic license key before deploying your application." -ForegroundColor DarkYellow
+		Write-Host "License Key exists, the package will not prompt the user.  If you would like to change the key please make sure to edit the newrelic.config file & add a valid New Relic license key before deploying your application." -ForegroundColor DarkYellow
 	}
 	
 	#Modify NewRelic.config to accept the user's app name input 

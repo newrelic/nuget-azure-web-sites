@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>NewRelicWindowsAzureWebSites</id>
+        <version>2.6.205.0</version>
+        <title>New Relic for Windows Azure Web Sites (Beta)</title>
+        <authors>Nick Floyd</authors>
+        <owners>New Relic</owners>
+        <projectUrl>https://newrelic.com/windowsazure</projectUrl>
+        <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>New Relic for Windows Azure Web Sites.  This package will install all of the resources needed to profile your Windows Azure Web Site.  
+
+Make sure you go to New Relic first to sign up and get your key at http://newrelic.com. Performance monitoring will never be the same after you do!</description>
+    </metadata>
+    <files>
+        <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
+        <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
+        <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
+        <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
+        <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
+        <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
+        <file src="tools\install.ps1" target="tools\install.ps1" />
+        <file src="tools\NewRelicHelper.psm1" target="tools\NewRelicHelper.psm1" />
+        <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
+    </files>
+</package>

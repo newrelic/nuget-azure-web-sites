@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>NewRelicWindowsAzureWebSites</id>
+        <id>NewRelic.Azure.WebSites</id>
         <version>2.6.205.0</version>
         <title>New Relic for Windows Azure Web Sites (Beta)</title>
         <authors>Nick Floyd</authors>

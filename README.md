@@ -19,7 +19,7 @@ Using the package locally
 -----------------------------
 1.  To use it you can open up your web app and choose >> tools >> Library Package Manager >> Package manager console
 2.  In the console make sure that the source drop down is set to local
-3.  Then type in "Install-Package NewRelicWindowsAzureWebSites"
+3.  Then type in "Install-Package NewRelic.Azure.WebSites"
 4.  Hit enter
 
 Pull requests

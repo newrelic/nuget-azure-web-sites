@@ -87,8 +87,8 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			[xml] $nuspecXml = Get-Content $PackageRoot\*.nuspec
 			$node = $nuspecXml.package.metadata
 		
-			It "Should have id element with value NewRelicWindowsAzureWebSites" {
-				$node.id | Should be "NewRelicWindowsAzureWebSites"
+			It "Should have id element with value NewRelic.Azure.WebSites" {
+				$node.id | Should be "NewRelic.Azure.WebSites"
 			}
 			
 			It "Should have version element with value $agentVersion" {

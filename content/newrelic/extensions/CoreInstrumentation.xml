@@ -83,7 +83,7 @@
 
 		<tracerFactory>
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
-				<!--<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />-->
+				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
 				<exactMethodMatcher methodName="PerformPreInit" />
 			</match>
 			<match assemblyName="System.Web" className="System.Web.Compilation.AssemblyBuilder">
@@ -364,11 +364,11 @@
 
 
 		<!-- **************************  UMBRACO CMS  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
+		<!--<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
 			</match>
-		</tracerFactory>
+		</tracerFactory>-->
 		<tracerFactory>
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="GenerateNotFoundContent" />

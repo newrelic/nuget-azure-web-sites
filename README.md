@@ -1,7 +1,6 @@
 nuget-azure-web-sites
 =====================
-
-Experimental (This package does not exist on nuget.org) - The nuget package for x86 apps (of type "web site") running on Windows Azure.
+The nuget package for x86 apps (of type "Web Site") running on Windows Azure.
 
 
 Contribute
@@ -20,7 +19,7 @@ Using the package locally
 -----------------------------
 1.  To use it you can open up your web app and choose >> tools >> Library Package Manager >> Package manager console
 2.  In the console make sure that the source drop down is set to local
-3.  Then type in "Install-Package NewRelicAzureWebSites"
+3.  Then type in "Install-Package NewRelicWindowsAzureWebSites"
 4.  Hit enter
 
 Pull requests

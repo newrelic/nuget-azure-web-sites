@@ -4,7 +4,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "2.6.203.0"
+		$agentVersion = "2.6.205.0"
 		
 		Context "When package exists" {
 			It "checks to see if content\newrelic.config exists" {
@@ -87,16 +87,16 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			[xml] $nuspecXml = Get-Content $PackageRoot\*.nuspec
 			$node = $nuspecXml.package.metadata
 		
-			It "Should have id element with value NewRelicAzureWebSites" {
-				$node.id | Should be "NewRelicAzureWebSites"
+			It "Should have id element with value NewRelicWindowsAzureWebSites" {
+				$node.id | Should be "NewRelicWindowsAzureWebSites"
 			}
 			
 			It "Should have version element with value $agentVersion" {
 				$node.version | Should be $agentVersion
 			}
 			
-			It "Should have title element with value New Relic for Windows Azure Web Sites" {
-				$node.title | Should be "New Relic for Windows Azure Web Sites"
+			It "Should have title element with value New Relic for Windows Azure Web Sites (Beta)" {
+				$node.title | Should be "New Relic for Windows Azure Web Sites (Beta)"
 			}
 			
 			It "Should have owners element with value New Relic" {

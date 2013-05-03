@@ -39,28 +39,7 @@ if($configXml -ne $null){
 	else{
 		Write-Host "License Key exists, the package will not prompt the user.  If you would like to change the key please make sure to edit the newrelic.config file & add a valid New Relic license key before deploying your application." -ForegroundColor DarkYellow
 	}
-	
-	#Modify NewRelic.config to accept the user's app name input 
-	$appName = create_dialog "NewRelic.AppName" "Please enter in the value you would like for the NewRelic.AppName AppSetting for the project named $projectName (optional, if none is provided we will use the solution name)."
-	$appNode = $configXml.SelectSingleNode("//e:application[e:name/text()]", $ns)
-	
-	if($appNode -ne $null) {
-		if($appName -ne $null -and $appName.Length -gt 0){
-			Write-Host "Updating Application name in the newrelic.config file with the value provided..."  -ForegroundColor DarkGreen
-			$appNode.name = $appName.ToString()
-		}
-		else{
-			if( $appNode.name.Length -lt 1 -or  $appNode.name -eq "My Application"){
-				Write-Host "Updating Application name in the newrelic.config file with the solution name..." -ForegroundColor DarkGreen	
-				$appNode.name = $projectName
-			}
-			else{
-			    Write-Host "Application name will not be updated, no new value was provided and a value already exists in the newrelic.config file..."  -ForegroundColor DarkYellow
-			}
-		}
-	}
-	
-    # save the newrelic.config file
+	# save the newrelic.config file
    	$configXml.Save($configPath)
 }
 

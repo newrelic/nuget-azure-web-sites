@@ -4,7 +4,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "2.6.206.0"
+		$agentVersion = "2.6.208.0"
 		
 		Context "When package exists" {
 			It "checks to see if content\newrelic.config exists" {
@@ -57,9 +57,9 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				$node.licenseKey | Should be "REPLACE_WITH_LICENSE_KEY"
 			}
 			
-			It "Should have the static value My Application for Application / Name" {
+			It "Should not have the static value My Application for Application / Name" {
 				$node = $configXml.SelectSingleNode("//e:application[e:name/text()]", $ns)
-				$node.name | Should Be "My Application"
+				$node.name | Should Be $null
 			}
 			
 			It "Should have agentEnabled set to true" {

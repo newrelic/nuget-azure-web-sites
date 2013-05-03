@@ -1,17 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>NewRelic.Azure.WebSites</id>
-        <version>2.6.206.0</version>
+        <version>2.6.208.0</version>
         <title>New Relic for Windows Azure Web Sites (Beta)</title>
         <authors>Nick Floyd</authors>
         <owners>New Relic</owners>
         <projectUrl>https://newrelic.com/windowsazure</projectUrl>
         <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>New Relic for Windows Azure Web Sites.  This package will install all of the resources needed to profile your Windows Azure Web Site.  
+        <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.
 
-Make sure you go to New Relic first to sign up and get your key at http://newrelic.com. Performance monitoring will never be the same after you do!</description>
+This is a BETA version of the .NET agent that works with Windows Azure Web Sites; we plan to add official support soon. If you want to be notified when New Relic's .NET agent have been fully released for Windows Azure Web Sites, contact support @ New Relic.</description>
+        <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites-beta</summary>
+        <releaseNotes>- Updates the profiler / agent to the latest build
+
+- Removes the need for the user needing to add an Application Name.  The application name is used to uniquely identify the instrumented app in New Relic. This value will now default from the Web Site Name (which is the APP_POOL_ID environment variable).  The values can still be customized in the NewRelic.Config or in your Web.Config
+
+- Adds the ability to put the license key into an environment variable (or App Setting under Configuration &gt;&gt; App Settings in the Windows Azure management portal).  The license key can still be added in the NewRelic.Config or in your Web.Config
+
+NOTE: for the BETA, if you are using NuGet 2.5+ please make sure to choose to overwrite (Y) the newrelic.config file with the one that has been provided in this release.</releaseNotes>
     </metadata>
     <files>
         <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

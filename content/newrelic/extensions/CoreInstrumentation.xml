@@ -83,7 +83,7 @@
 
 		<tracerFactory>
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
-				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
+				<!--<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />-->
 				<exactMethodMatcher methodName="PerformPreInit" />
 			</match>
 			<match assemblyName="System.Web" className="System.Web.Compilation.AssemblyBuilder">
@@ -245,7 +245,7 @@
 
 			<!-- Oracle vendor driver -->
 			<match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleCommand">
-				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior" />
+				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Boolean,System.Boolean,System.Data.CommandBehavior" />
 				<exactMethodMatcher methodName="ExecuteNonQuery" />
 				<exactMethodMatcher methodName="ExecuteScalar" />
 				<exactMethodMatcher methodName="ExecuteXmlReader" />
@@ -364,11 +364,11 @@
 
 
 		<!-- **************************  UMBRACO CMS  ***************************** -->
-		<!--<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
 			</match>
-		</tracerFactory>-->
+		</tracerFactory>
 		<tracerFactory>
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="GenerateNotFoundContent" />

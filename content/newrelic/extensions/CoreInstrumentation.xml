@@ -14,7 +14,8 @@
 
 		<!-- hook up the request listener -->
 		<!-- Mandatory for basic traces. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.InitModuleTracerFactory">
+		<!-- Special case.  See internal implementation of dynamic dispatcher for details. -->
+		<tracerFactory metricName="NewRelic.Agent.Core.Tracer.Factories.Web.InitModuleTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
 				<exactMethodMatcher methodName="InitModulesCommon" />
 				<exactMethodMatcher methodName="RegisterEventSubscriptionsWithIIS" />

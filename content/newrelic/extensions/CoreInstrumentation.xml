@@ -161,7 +161,7 @@
 		</tracerFactory>
 
 		<!-- WCF (Windows Communication Framework) -->
-<!--
+		<!--
         <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.HostedHttpRequestAsyncResultTracerFactory">
             <match assemblyName="System.ServiceModel.Activation" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
                 <exactMethodMatcher methodName="HandleRequest"/>
@@ -174,12 +174,12 @@
 			</match>
 		</tracerFactory>
 -->
-        <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ChannelHandlerTracerFactory" transactionNamingPriority="4">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ChannelHandlerTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.ChannelHandler">
 				<exactMethodMatcher methodName="HandleRequest" parameters="System.ServiceModel.Channels.RequestContext,System.ServiceModel.OperationContext" />
 			</match>
 		</tracerFactory>
-        
+
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceInvocationTracerFactory" transactionNamingPriority="4">
 			<!-- synchronous service invocations -->
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.SyncMethodInvoker">
@@ -193,36 +193,25 @@
 
 		<!-- WCF (Windows Communication Framework) client -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.InvokeServiceTracerFactory">
-		<match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
-			<exactMethodMatcher methodName="InvokeService" />
-		</match>
+			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
+				<exactMethodMatcher methodName="InvokeService" />
+			</match>
 		</tracerFactory>
 
 		<!-- NET external calls -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.WebClientDownloadTracerFactory">
-			<match assemblyName="System" className="System.Net.WebClient">
-				<exactMethodMatcher methodName="DownloadData" parameters="System.Uri" />
-				<exactMethodMatcher methodName="DownloadFile" parameters="System.Uri,System.String" />
-        <exactMethodMatcher methodName="DownloadString" parameters="System.Uri" />
-        <exactMethodMatcher methodName="CompleteWebClientState" />
+
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestTracerFactory">
+			<match assemblyName="System" className="System.Net.HttpWebRequest">
+				<exactMethodMatcher methodName="GetResponse" />
 			</match>
 		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.ConnectStreamTracerFactory">
-			<match assemblyName="System" className="System.Net.ConnectStream">
-				<exactMethodMatcher methodName="Read" parameters="System.Byte[],System.Int32,System.Int32" />
-				<exactMethodMatcher methodName="WriteHeaders" parameters="System.Boolean" />
-			</match>
-		</tracerFactory>
-
-
-  
 
 		<tracerFactory enable="true" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">
 				<exactMethodMatcher methodName="SerializeHeaders" />
 			</match>
 		</tracerFactory>
+
 		<!-- **************************  DATABASE INSTRUMENTATION  ***************************** -->
 
 		<!-- command methods -->

@@ -120,7 +120,7 @@
 		</tracerFactory>
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.BrowserTagTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.UI.Control">
-				<exactMethodMatcher methodName="RenderControl" parameters="System.Web.UI.HtmlTextWriter" />
+				<exactMethodMatcher methodName="RenderControl" parameters="System.Web.UI.HtmlTextWriter,System.Web.UI.Adapters.ControlAdapter" />
 			</match>
 			<match assemblyName="System.Web" className="System.Web.UI.LiteralControl">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />

@@ -7,6 +7,7 @@ function create_dialog([System.String]$title, [System.String]$msg){
 	$objForm.Text = $title
 	$objForm.Size = New-Object System.Drawing.Size(300,200) 
 	$objForm.StartPosition = "CenterScreen"
+	$objForm.FormBorderStyle = "FixedDialog"
 
 	$objForm.KeyPreview = $True
 	$objForm.Add_KeyDown({if ($_.KeyCode -eq "Enter") 

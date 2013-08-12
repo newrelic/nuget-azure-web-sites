@@ -26,7 +26,7 @@ if($configXml -ne $null){
 	$serviceNode = $configXml.configuration.service
 	if($serviceNode -ne $null -and $serviceNode.licenseKey -eq "REPLACE_WITH_LICENSE_KEY"){
 		
-		$licenseKey = create_dialog "License Key" "Please enter in your New Relic license key (optional)"
+		$licenseKey = create_dialog "License Key" "Please enter your New Relic license key (optional)"
 		
 		if($licenseKey -ne $null -and $licenseKey.Length -gt 0){
 			Write-Host "Updating licensekey in the newrelic.config file..."	 -ForegroundColor DarkGreen

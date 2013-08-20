@@ -128,9 +128,16 @@
 		</tracerFactory>
 
 		<!-- MVC controller/action -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ControllerActionInvokerTracerFactory">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.MvcControllerActionInvokerTracerFactory">
 			<match assemblyName="System.Web.Mvc" className="System.Web.Mvc.ControllerActionInvoker">
-				<exactMethodMatcher methodName="InvokeActionMethod" />
+				<exactMethodMatcher methodName="GetFilters" />
+			</match>
+		</tracerFactory>
+
+		<!-- WebAPI controller/action -->
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.WebApiControllerActionInvokerTracerFactory">
+			<match assemblyName="System.Web.Http" className="System.Web.Http.Controllers.ApiControllerActionInvoker">
+				<exactMethodMatcher methodName="InvokeActionAsync" />
 			</match>
 		</tracerFactory>
 

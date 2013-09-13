@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.10.40.0</version>
+    <version>2.12.146.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -13,12 +13,23 @@
     <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
     <releaseNotes>
 
+Fixes
+
+* Fixes an issue where content-type was being explicitly checked for "text/HTML."  In some frameworks, such as NancyFX (http://nancyfx.org/), the charset was being added to the content-type before the New Relic HTTP module was loaded which caused the explicit check to fail and the RUM header and footer to not be added to the pages.
+* Fixes an issue when the application results in a status code 404 or greater the metrics would be reported for the page not found instead of recording metrics for the 404 itself.  This change also addresses an issue where assets such as png, css, js and so on would have metrics recorded for each individual asset instead of rolling them up into the appropriate asset group, such as *.png or *.css.  Finally there were other metric grouping issues fixed where metrics were being named the custom route (such as /products/1) on some applications instead of using the name of the code asset that was doing the work to create the page (such as /products/productstemplate.aspx).
+* Corrects functionality of the Status Monitor for IIS6 installations and applications running under sites other than DefaultWebSite. 
+
+New Features
+
+* A thread profiler has been added to the .NET agent. The thread profiler is a low-impact profiling tool that can be used in production to identify bottlenecks in an application.
+
 Improvements
 
-* Improved the naming of MVC transactions.  Naming to controller/action should be much more reliable now.
-* Improved WebAPI support.  You should now see Web Transactions grouped by [controller].[action] rather than all WebAPI transactions reporting as System.Web.Http.WebHost.HttpControllerHandler.
-* Fixed a bug whereby IIS applications with underscore characters in their names were not displayed correctly in the Status Monitor.
-* Fixed a bug whereby users could not view the log file for some IIS applications in the Status Monitor.</releaseNotes>
+* Log files now have windows style line endings so they display correctly in notepad.exe.
+* The status monitor tray application will now prompt for elevation on launch rather than error at runtime when it doesn't have correct permissions.
+* Azure Cloud Services nuget package : Modified the package so that when installing a new version it will attempt an upgrade if an existing agent is installed. (This feature requires Nuget v.2.6+ which prompts the user to overwrite existing / modified files - the newrelic.cmd must be overwritten to apply the new commands on the cloud service)
+* Azure Cloud Services nuget package : The package now properly cleans up the environment variables out of the csdef when an uninstall or update occurs.
+* Azure Cloud Services nuget package : For Worker Roles, the msiexec command in the newrelic.cmd file as been changed so that when the agent is installed it will install it for all CLR based applications.</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

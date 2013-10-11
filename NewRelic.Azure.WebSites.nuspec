@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.13.38.0</version>
+    <version>2.14.53.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -15,8 +15,11 @@
 
 Fixes
 
-* An unhandled null reference exception has been fixed.
-* Fixed a bug that would cause a stack overflow if you tried to instrument a generic method with multiple instantiations.</releaseNotes>
+* Resolved an issue where an application with limited permissions could throw an expensive/slow exception repeatedly per transaction causing increased CPU usage and decreased response time
+* Resolved a performance issue associated with reading configuration off disk too frequently.
+* Resolved several minor performance issues.
+
+</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

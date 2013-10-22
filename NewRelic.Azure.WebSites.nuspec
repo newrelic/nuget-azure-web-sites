@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.14.53.0</version>
+    <version>2.15.180.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -13,13 +13,14 @@
     <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
     <releaseNotes>
 
+New Features
+
+* Adds the ability to instrument processes from IIS Express which include Azure Compute Emulator, Web Matrix  and Visual Studio. By checking the "Instrument all .NET Applications" checkbox during the installation developers will now be able to get instrumentation on all web applications running as a hosted IISExpress process.
+
 Fixes
 
-* Resolved an issue where an application with limited permissions could throw an expensive/slow exception repeatedly per transaction causing increased CPU usage and decreased response time
-* Resolved a performance issue associated with reading configuration off disk too frequently.
-* Resolved several minor performance issues.
-
-</releaseNotes>
+* Fixes logging during the installation of the .NET Agent for when the installer looks for an existing license key and on cleanup methods.  Now when running installer using msiexec with options /i and /l*v it will now properly report the status of all installer actions in the log output.
+* Fixed a bug that would cause a stack overflow if you tried to instrument a generic method with multiple instantiations.</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

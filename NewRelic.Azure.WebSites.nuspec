@@ -1,19 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <metadata>
-    <id>NewRelic.Azure.WebSites</id>
-    <version>2.15.186.0</version>
-    <title>New Relic for Windows Azure Web Sites (x86)</title>
-    <authors>Nick Floyd</authors>
-    <owners>New Relic</owners>
-    <projectUrl>https://newrelic.com/windowsazure</projectUrl>
-    <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.</description>
-    <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
-    <releaseNotes>
-
-New Features
+    <metadata>
+        <id>NewRelic.Azure.WebSites</id>
+        <version>2.15.186.1</version>
+        <title>New Relic for Windows Azure Web Sites (x86)</title>
+        <authors>Nick Floyd</authors>
+        <owners>New Relic</owners>
+        <projectUrl>https://newrelic.com/windowsazure</projectUrl>
+        <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.</description>
+        <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
+        <releaseNotes>New Features
 
 * Adds the ability to instrument processes from IIS Express which include Azure Compute Emulator, Web Matrix  and Visual Studio. By checking the "Instrument all .NET Applications" checkbox during the installation developers will now be able to get instrumentation on all web applications running as a hosted IISExpress process.
 
@@ -21,16 +19,15 @@ Fixes
 
 * Fixes logging during the installation of the .NET Agent for when the installer looks for an existing license key and on cleanup methods.  Now when running installer using msiexec with options /i and /l*v it will now properly report the status of all installer actions in the log output.
 * Fixed a bug that would cause a stack overflow if you tried to instrument a generic method with multiple instantiations.</releaseNotes>
-  </metadata>
-  <files>
-    <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
-    <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
-    <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
-    <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
-    <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
-    <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
-    <file src="tools\install.ps1" target="tools\install.ps1" />
-    <file src="tools\NewRelicHelper.psm1" target="tools\NewRelicHelper.psm1" />
-    <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
-  </files>
+    </metadata>
+    <files>
+        <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
+        <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
+        <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
+        <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
+        <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
+        <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
+        <file src="tools\install.ps1" target="tools\install.ps1" />
+        <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
+    </files>
 </package>

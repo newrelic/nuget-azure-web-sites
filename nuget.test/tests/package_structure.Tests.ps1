@@ -13,9 +13,6 @@
 #			(Test-Path $PackageRoot\tools\install.ps1) | Should Be $true
 #		}
 #		
-#		It "checks to see if tools\NewRelicHelper.psm1 exists" {
-#			(Test-Path $PackageRoot\tools\install.ps1) | Should Be $true
-#		}
 #		
 #		It "checks to see if lib\NewRelic.Api.Agent.dll exists" {
 #			(Test-Path $PackageRoot\lib\NewRelic.Api.Agent.dll) | Should Be $true

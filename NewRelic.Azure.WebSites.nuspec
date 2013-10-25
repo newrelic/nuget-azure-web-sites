@@ -13,12 +13,7 @@
         <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
         <releaseNotes>New Features
 
-* Adds the ability to instrument processes from IIS Express which include Azure Compute Emulator, Web Matrix  and Visual Studio. By checking the "Instrument all .NET Applications" checkbox during the installation developers will now be able to get instrumentation on all web applications running as a hosted IISExpress process.
-
-Fixes
-
-* Fixes logging during the installation of the .NET Agent for when the installer looks for an existing license key and on cleanup methods.  Now when running installer using msiexec with options /i and /l*v it will now properly report the status of all installer actions in the log output.
-* Fixed a bug that would cause a stack overflow if you tried to instrument a generic method with multiple instantiations.</releaseNotes>
+* Removes prompting for the license key from the install process.  In a recent release of the Microsoft Azure Portal an update has been made so that users can go to the WebSite Project in the portal &gt; Configuration &gt; Developer Analytics and either choose the New Relic add on there or simply add a license key.  All previous methods of using the license key still work but this feature allows a "no touch" package-install for Azure Web Sites</releaseNotes>
     </metadata>
     <files>
         <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

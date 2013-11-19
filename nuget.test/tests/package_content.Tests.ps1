@@ -92,7 +92,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			}
 			
 			It "Should have version element with value $agentVersion" {
-				$node.version | Should be "2.15.186.1"
+				$node.version | Should be $agentVersion
 			}
 			
 			It "Should have title element with value New Relic for Windows Azure Web Sites (x86)" {

@@ -73,7 +73,6 @@
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ASPProcessRequestTracerFactory" transactionNamingPriority="3">
 			<!-- ASP pages -->
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
-				<exactMethodMatcher methodName="ProcessRequest" parameters="System.Web.HttpContext" />
 				<exactMethodMatcher methodName="ProcessRequest" parameters="System.Boolean,System.Boolean" />
 			</match>
 			<!-- async ASP pages -->
@@ -330,35 +329,6 @@
 			</match>
 
 		</tracerFactory>
-
-		<!-- DbConnection.Open() -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.OpenConnectionTracerFactory">
-			<match assemblyName="System.Data" className="System.Data.SqlClient.SqlConnection,System.Data.Odbc.OdbcConnection,System.Data.OleDb.OleDbConnection">
-				<exactMethodMatcher methodName="Open" />
-			</match>
-
-			<!-- built in deprecated Oracle driver -->
-			<match assemblyName="System.Data.OracleClient" className="System.Data.OracleClient.OracleConnection">
-				<exactMethodMatcher methodName="Open" />
-			</match>
-
-			<!-- Oracle vendor driver -->
-			<match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleConnection">
-				<exactMethodMatcher methodName="Open" />
-			</match>
-
-			<!-- MySql (official) driver -->
-			<match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlConnection">
-				<exactMethodMatcher methodName="Open" />
-			</match>
-
-			<!-- Npgsql Postgres data provider -->
-			<match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
-				<exactMethodMatcher methodName="Open" />
-			</match>
-
-		</tracerFactory>
-
 
 		<!-- **************************  UMBRACO CMS  ***************************** -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">

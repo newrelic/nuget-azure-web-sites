@@ -1,28 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>NewRelic.Azure.WebSites</id>
-        <version>2.15.186.1</version>
-        <title>New Relic for Windows Azure Web Sites (x86)</title>
-        <authors>Nick Floyd</authors>
-        <owners>New Relic</owners>
-        <projectUrl>https://newrelic.com/windowsazure</projectUrl>
-        <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.</description>
-        <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
-        <releaseNotes>New Features
+  <metadata>
+    <id>NewRelic.Azure.WebSites</id>
+    <version>2.16.164.0</version>
+    <title>New Relic for Windows Azure Web Sites (x86)</title>
+    <authors>Nick Floyd</authors>
+    <owners>New Relic</owners>
+    <projectUrl>https://newrelic.com/windowsazure</projectUrl>
+    <iconUrl>http://newrelic.com/images/avatar-newrelic.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.</description>
+    <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
+    <releaseNotes>
 
-* Removes prompting for the license key from the install process.  In a recent release of the Microsoft Azure Portal an update has been made so that users can go to the WebSite Project in the portal &gt; Configuration &gt; Developer Analytics and either choose the New Relic add on there or simply add a license key.  All previous methods of using the license key still work but this feature allows a "no touch" package-install for Azure Web Sites</releaseNotes>
-    </metadata>
-    <files>
-        <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
-        <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
-        <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
-        <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
-        <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
-        <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
-        <file src="tools\install.ps1" target="tools\install.ps1" />
-        <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
-    </files>
+Fixes
+
+* Fixes an issue where the agent was making calls to retrieve the SQL connection's database version unnecessarily. This issue may have caused some customer applications to unnecessarily hold onto database connections.
+* Fixes an issue with the harvesting of AnalyticsEvents where a race condition would cause the collection of events to become invalid.
+
+* Fixes a bug where generic exceptions were being reported with generic arguments which made it so they couldn't be ignored.
+* Fixed a bug where attempting to add custom instrumentation for a parameterless overload of a method with parameterized overloads would result in all overloads of the method being instrumented.
+* Added back support for custom instrumenting methods via parameters='void' in the exactMethodMatcher.  It is recommended you use the new way which is to simply leave the parameters attribute off of your exactMethodMatcher, but for those with existing instrumentation files using 'void' parameters that will once again work.</releaseNotes>
+  </metadata>
+  <files>
+    <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />
+    <file src="content\newrelic\extensions\extension.xsd" target="content\newrelic\extensions\extension.xsd" />
+    <file src="content\newrelic\NewRelic.Agent.Core.dll" target="content\newrelic\NewRelic.Agent.Core.dll" />
+    <file src="content\newrelic\newrelic.config" target="content\newrelic\newrelic.config" />
+    <file src="content\newrelic\NewRelic.Profiler.dll" target="content\newrelic\NewRelic.Profiler.dll" />
+    <file src="lib\NewRelic.Api.Agent.dll" target="lib\NewRelic.Api.Agent.dll" />
+    <file src="tools\install.ps1" target="tools\install.ps1" />
+    <file src="tools\uninstall.ps1" target="tools\uninstall.ps1" />
+  </files>
 </package>

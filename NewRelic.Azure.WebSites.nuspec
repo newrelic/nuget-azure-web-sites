@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.16.164.0</version>
+    <version>2.17.264.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -15,12 +15,8 @@
 
 Fixes
 
-* Fixes an issue where the agent was making calls to retrieve the SQL connection's database version unnecessarily. This issue may have caused some customer applications to unnecessarily hold onto database connections.
-* Fixes an issue with the harvesting of AnalyticsEvents where a race condition would cause the collection of events to become invalid.
-
-* Fixes a bug where generic exceptions were being reported with generic arguments which made it so they couldn't be ignored.
-* Fixed a bug where attempting to add custom instrumentation for a parameterless overload of a method with parameterized overloads would result in all overloads of the method being instrumented.
-* Added back support for custom instrumenting methods via parameters='void' in the exactMethodMatcher.  It is recommended you use the new way which is to simply leave the parameters attribute off of your exactMethodMatcher, but for those with existing instrumentation files using 'void' parameters that will once again work.</releaseNotes>
+* Improves running performance and memory consumption of the agent.
+* Fixes a bug where sometimes the first transaction after a cold start would be recorded resulting in a notable spike in response time graphs.</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

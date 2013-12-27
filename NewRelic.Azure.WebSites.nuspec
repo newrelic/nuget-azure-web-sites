@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.17.268.0</version>
+    <version>2.18.35.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -15,8 +15,8 @@
 
 Fixes
 
-* Improves running performance and memory consumption of the agent.
-* Fixes a bug where sometimes the first transaction after a cold start would be recorded resulting in a notable spike in response time graphs.</releaseNotes>
+* Fixed a bug where transactions were sometimes not being named.
+* Fixed a bug where status codes were not correctly being ignored when they should have been.</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

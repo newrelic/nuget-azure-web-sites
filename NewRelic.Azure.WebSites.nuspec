@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.19.3.0</version>
+    <version>2.20.24.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -13,9 +13,14 @@
     <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
     <releaseNotes>
 
+Improvements
+
+* Adds Windows Server Monitoring to the New Relic Azure Cloud Services nuget package.  Now when users add or update the nuget package on their cloud service projects and deploy they will begin getting all of the data and benefits of Windows Server monitoring. Thanks [Steven Kuhn](https://github.com/chartek) for the contribution!
+
 Fixes
 
-* Additional fixes for cases where status codes were not correctly being ignored when they should have been.</releaseNotes>
+* Fixes a bug during metrics harvest where a race condition might throw an exception.
+* Browser monitoring has been enhanced to allow for easier inclusion of features in client-side profiling. The agent now only injects javascript in the page header or, in the event that no head section exists, immediately before the opening body tag. In addition, the algorithm for identifying the insertion point has been improved.</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

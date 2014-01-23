@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.20.25.0</version>
+    <version>2.21.84.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -15,7 +15,7 @@
 
 Fixes
 
-* Fixes an issue where browser traces were not showing up in New Relic.</releaseNotes>
+* We now add custom parameters to Codename "Rubicon."</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

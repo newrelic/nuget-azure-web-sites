@@ -13,7 +13,7 @@
     <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
     <releaseNotes>
 
-Fixes
+Improvements
 
 * We now add custom parameters to Codename "Rubicon."</releaseNotes>
   </metadata>

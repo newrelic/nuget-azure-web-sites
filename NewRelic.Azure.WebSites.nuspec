@@ -15,7 +15,7 @@
 
 Improvements
 
-* We now add custom parameters to Codename "Rubicon."</releaseNotes>
+* We now add custom parameters to project Codename "Rubicon."</releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

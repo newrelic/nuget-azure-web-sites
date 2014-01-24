@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>2.21.84.0</version>
+    <version>2.22.1.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>
@@ -12,10 +12,7 @@
     <description>Go to New Relic to sign up and get your license key at http://newrelic.com or you can get a license key through the Windows Azure management portal via Add-On store.</description>
     <summary>This package will add all of the resources needed to profile your Windows Azure Web Site. For more information on this package visit: https://newrelic.com/docs/dotnet/azure-web-sites</summary>
     <releaseNotes>
-
-Improvements
-
-* We now add custom parameters to project Codename "Rubicon."</releaseNotes>
+    </releaseNotes>
   </metadata>
   <files>
     <file src="content\newrelic\extensions\CoreInstrumentation.xml" target="content\newrelic\extensions\CoreInstrumentation.xml" />

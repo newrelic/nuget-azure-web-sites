@@ -24,7 +24,7 @@
 
 		<!-- report the request pipeline steps -->
 		<!-- Mandatory for basic traces. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ExecutionPipelineStepTracerFactory" level="2" metric="none">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ExecutionPipelineStepTracerFactory" level="2" metric="none" enabled="false">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
 				<exactMethodMatcher methodName="ExecuteStep" parameters="IExecutionStep,System.Boolean&amp;" />
 			</match>
@@ -62,14 +62,6 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory metricName="DotNet/HttpWriter/Write" name="NewRelic.Agent.Core.Tracer.Factories.MultipleInvocationTracerFactory" level="5">
-			<match assemblyName="System.Web" className="System.Web.HttpWriter">
-				<exactMethodMatcher methodName="Write" parameters="System.String" />
-				<exactMethodMatcher methodName="Write" parameters="System.Char[],System.Int32,System.Int32" />
-			</match>
-		</tracerFactory>
-
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ASPProcessRequestTracerFactory" transactionNamingPriority="3">
 			<!-- ASP pages -->
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
@@ -106,18 +98,12 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ControlInitRecursiveTracerFactory" metricName="instance">
-			<match assemblyName="System.Web" className="System.Web.UI.Control">
-				<exactMethodMatcher methodName="InitRecursive" />
-			</match>
-		</tracerFactory>
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.CallHandlerExecutionTracerFactory" transactionNamingPriority="2">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication+CallHandlerExecutionStep">
 				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" />
 			</match>
 		</tracerFactory>
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.BrowserTagTracerFactory">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.BrowserTagTracerFactory" enabled="false">
 			<match assemblyName="System.Web" className="System.Web.UI.Control">
 				<exactMethodMatcher methodName="RenderControl" parameters="System.Web.UI.HtmlTextWriter,System.Web.UI.Adapters.ControlAdapter" />
 			</match>
@@ -330,7 +316,35 @@
 
 		</tracerFactory>
 
-		<!-- **************************  UMBRACO CMS  ***************************** -->
+    <!-- DbConnection.Open() -->
+    <tracerFactory>
+      <match assemblyName="System.Data" className="System.Data.SqlClient.SqlConnection,System.Data.Odbc.OdbcConnection,System.Data.OleDb.OleDbConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+      <!-- built in deprecated Oracle driver -->
+      <match assemblyName="System.Data.OracleClient" className="System.Data.OracleClient.OracleConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+      <!-- Oracle vendor driver -->
+      <match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+      <!-- MySql (official) driver -->
+      <match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+      <!-- Npgsql Postgres data provider -->
+      <match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+    </tracerFactory>
+
+    <!-- **************************  UMBRACO CMS  ***************************** -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />

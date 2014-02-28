@@ -84,11 +84,6 @@
 			<match assemblyName="System.Web" className="System.Web.Compilation.BuildManager">
 				<exactMethodMatcher methodName="CompileWebFile" />
 			</match>
-			<match assemblyName="System.Web" className="System.Web.HttpRequest">
-				<exactMethodMatcher methodName="FillInFilesCollection" />
-				<exactMethodMatcher methodName="FillInFormCollection" />
-				<exactMethodMatcher methodName="FillInQueryStringCollection" />
-			</match>
 		</tracerFactory>
 
 		<!-- Ignore 404s thrown from the ScriptResourceHandler -->
@@ -280,7 +275,7 @@
 		</tracerFactory>
 
 		<!-- datareader methods -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.DataReaderTracerFactory" level="1">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.DataReaderTracerFactory" level="1" enabled="false">
 			<match assemblyName="System.Data" className="System.Data.SqlClient.SqlDataReader">
 				<exactMethodMatcher methodName="NextResult" />
 				<exactMethodMatcher methodName="Read" />

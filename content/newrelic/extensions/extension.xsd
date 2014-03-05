@@ -67,7 +67,7 @@
 											</xs:documentation>
 										</xs:annotation>
 									</xs:attribute>
-									<xs:attribute name="enable" default="true" type="xs:boolean" />
+									<xs:attribute name="enabled" default="true" type="xs:boolean" />
 									<xs:attribute name="level" default="0">
 										<xs:simpleType>
 											<xs:restriction base="xs:integer">

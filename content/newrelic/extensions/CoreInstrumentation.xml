@@ -39,12 +39,6 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory>
-			<match assemblyName="System.Web" className="System.Web.HttpApplication+MaterializeHandlerExecutionStep">
-				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" />
-			</match>
-		</tracerFactory>
-
 		<!-- agent shutdown hook -->
 		<!-- Mandatory for traces to work. -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.HttpApplicationEndTracerFactory">

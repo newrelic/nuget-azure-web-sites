@@ -143,12 +143,6 @@
 
 		<!-- WCF (Windows Communication Framework) -->
 		<!--
-        <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.HostedHttpRequestAsyncResultTracerFactory">
-            <match assemblyName="System.ServiceModel.Activation" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
-                <exactMethodMatcher methodName="HandleRequest"/>
-            </match>
-        </tracerFactory>
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceModelRequestTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
 				<exactMethodMatcher methodName="HandleRequest" />

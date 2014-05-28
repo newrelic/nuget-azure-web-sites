@@ -142,20 +142,7 @@
 		</tracerFactory>
 
 		<!-- WCF (Windows Communication Framework) -->
-		<!--
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceModelRequestTracerFactory" transactionNamingPriority="4">
-			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Activation.HostedHttpRequestAsyncResult">
-				<exactMethodMatcher methodName="HandleRequest" />
-			</match>
-		</tracerFactory>
--->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ChannelHandlerTracerFactory" transactionNamingPriority="4">
-			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.ChannelHandler">
-				<exactMethodMatcher methodName="HandleRequest" parameters="System.ServiceModel.Channels.RequestContext,System.ServiceModel.OperationContext" />
-			</match>
-		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.ServiceInvocationTracerFactory" transactionNamingPriority="4">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WcfServiceInvocationTracerFactory" transactionNamingPriority="4">
 			<!-- synchronous service invocations -->
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.SyncMethodInvoker">
 				<exactMethodMatcher methodName="Invoke" parameters="System.Object,System.Object[],System.Object[]&amp;" />
@@ -163,13 +150,6 @@
 			<!-- asynchronous service invocations -->
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.AsyncMethodInvoker">
 				<exactMethodMatcher methodName="InvokeBegin" parameters="System.Object,System.Object[],System.AsyncCallback,System.Object" />
-			</match>
-		</tracerFactory>
-
-		<!-- WCF (Windows Communication Framework) client -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.InvokeServiceTracerFactory">
-			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
-				<exactMethodMatcher methodName="InvokeService" />
 			</match>
 		</tracerFactory>
 
@@ -210,6 +190,14 @@
 
 			<!-- Oracle vendor driver -->
 			<match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleCommand">
+				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Boolean,System.Boolean,System.Data.CommandBehavior" />
+				<exactMethodMatcher methodName="ExecuteNonQuery" />
+				<exactMethodMatcher methodName="ExecuteScalar" />
+				<exactMethodMatcher methodName="ExecuteXmlReader" />
+			</match>
+			
+			<!-- Oracle vendor driver for ManagedDataAccess -->
+			<match assemblyName="Oracle.ManagedDataAccess" className="Oracle.ManagedDataAccess.Client.OracleCommand">
 				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Boolean,System.Boolean,System.Data.CommandBehavior" />
 				<exactMethodMatcher methodName="ExecuteNonQuery" />
 				<exactMethodMatcher methodName="ExecuteScalar" />
@@ -280,6 +268,12 @@
 				<exactMethodMatcher methodName="NextResult" />
 				<exactMethodMatcher methodName="Read" />
 			</match>
+			
+			<!-- Oracle vendor driver for ManagedDataAccess -->
+			<match assemblyName="Oracle.ManagedDataAccess" className="Oracle.ManagedDataAccess.Client.OracleDataReader">
+				<exactMethodMatcher methodName="NextResult" />
+				<exactMethodMatcher methodName="Read" />
+			</match>
 
 			<!-- MySql (official) driver -->
 			<match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlDataReader">
@@ -299,35 +293,40 @@
 
 		</tracerFactory>
 
-    <!-- DbConnection.Open() -->
-    <tracerFactory>
-      <match assemblyName="System.Data" className="System.Data.SqlClient.SqlConnection,System.Data.Odbc.OdbcConnection,System.Data.OleDb.OleDbConnection">
-        <exactMethodMatcher methodName="Open" />
-      </match>
+		<!-- DbConnection.Open() -->
+		<tracerFactory>
+			<match assemblyName="System.Data" className="System.Data.SqlClient.SqlConnection,System.Data.Odbc.OdbcConnection,System.Data.OleDb.OleDbConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
 
-      <!-- built in deprecated Oracle driver -->
-      <match assemblyName="System.Data.OracleClient" className="System.Data.OracleClient.OracleConnection">
-        <exactMethodMatcher methodName="Open" />
-      </match>
+			<!-- built in deprecated Oracle driver -->
+			<match assemblyName="System.Data.OracleClient" className="System.Data.OracleClient.OracleConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
 
-      <!-- Oracle vendor driver -->
-      <match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleConnection">
-        <exactMethodMatcher methodName="Open" />
-      </match>
+			<!-- Oracle vendor driver -->
+			<match assemblyName="Oracle.DataAccess" className="Oracle.DataAccess.Client.OracleConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
+			
+			<!-- Oracle vendor driver for ManagedDataAccess -->
+			<match assemblyName="Oracle.ManagedDataAccess" className="Oracle.ManagedDataAccess.Client.OracleConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
 
-      <!-- MySql (official) driver -->
-      <match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlConnection">
-        <exactMethodMatcher methodName="Open" />
-      </match>
+			<!-- MySql (official) driver -->
+			<match assemblyName="MySql.Data" className="MySql.Data.MySqlClient.MySqlConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
 
-      <!-- Npgsql Postgres data provider -->
-      <match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
-        <exactMethodMatcher methodName="Open" />
-      </match>
+			<!-- Npgsql Postgres data provider -->
+			<match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
+				<exactMethodMatcher methodName="Open" />
+			</match>
 
-    </tracerFactory>
+		</tracerFactory>
 
-    <!-- **************************  UMBRACO CMS  ***************************** -->
+		<!-- **************************  UMBRACO CMS  ***************************** -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.Umbraco.UmbracoDefaultTracerFactory" transactionNamingPriority="4">
 			<match assemblyName="umbraco" className="umbraco.UmbracoDefault">
 				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />

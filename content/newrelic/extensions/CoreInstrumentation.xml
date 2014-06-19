@@ -101,6 +101,13 @@
 			</match>
 		</tracerFactory>
 
+		<!-- MVC Exception Reporting -->
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.MvcExceptionFilterTracerFactory">
+			<match assemblyName="System.Web.Mvc" className="System.Web.Mvc.ControllerActionInvoker">
+				<exactMethodMatcher methodName="InvokeExceptionFilters" parameters="System.Web.Mvc.ControllerContext,System.Collections.Generic.IList`1[System.Web.Mvc.IExceptionFilter],System.Exception" />
+			</match>
+		</tracerFactory>
+
 		<!-- MVC controller/action -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.MvcControllerActionInvokerTracerFactory">
 			<match assemblyName="System.Web.Mvc" className="System.Web.Mvc.ControllerActionInvoker">

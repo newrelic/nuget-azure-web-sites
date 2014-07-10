@@ -122,6 +122,13 @@
 			</match>
 		</tracerFactory>
 
+		<!-- **************************  KATANA (OWIN)  ************************** -->
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.WebTransactionTracerFactory">
+			<match assemblyName="Microsoft.Owin.Host.HttpListener" className="Microsoft.Owin.Host.HttpListener.OwinHttpListener">
+				<exactMethodMatcher methodName="StartProcessingRequest" parameters="System.Net.HttpListenerContext" />
+			</match>
+		</tracerFactory>
+
 		<!-- **************************  WEB SERVICES  ***************************** -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.SoapLogicalMethodTracerFactory" transactionNamingPriority="4">
@@ -157,10 +164,18 @@
 			<!-- asynchronous service invocations -->
 			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Dispatcher.AsyncMethodInvoker">
 				<exactMethodMatcher methodName="InvokeBegin" parameters="System.Object,System.Object[],System.AsyncCallback,System.Object" />
+				<exactMethodMatcher methodName="InvokeEnd" parameters="System.Object,System.Object[]&amp;,System.IAsyncResult" />
 			</match>
 		</tracerFactory>
 
-		<!-- NET external calls -->
+    <!-- WCF (Windows Communication Framework) client -->
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WcfInvokeServiceTracerFactory">
+      <match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
+        <exactMethodMatcher methodName="InvokeService" />
+      </match>
+    </tracerFactory>
+
+    <!-- NET external calls -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">

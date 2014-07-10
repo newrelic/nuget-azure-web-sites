@@ -57,7 +57,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			}
 			
 			It "checks to see if content\newrelic\extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll" {
-				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll) | Should Be $true
+				(Test-Path content\newrelic\extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll) | Should Be $true
 			}
 			
 			It "checks to see if content\newrelic\extensions\Providers\TransactionContext\Default\NewRelic.Agent.Extensions.dll" {

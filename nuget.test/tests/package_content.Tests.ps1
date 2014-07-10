@@ -11,12 +11,24 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				(Test-Path $PackageRoot\content\newrelic\newrelic.config) | Should Be $true
 			}
 			
+			It "checks to see if content\newrelic.xsd exists" {
+				(Test-Path $PackageRoot\content\newrelic\newrelic.config) | Should be $true
+			}
+			
 			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll exists" {
 				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Core.dll) | Should Be $true
 			}
 			
+			It "checks to see if content\newrelic\NewRelic.Agent.Core.pdb does not exist" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Core.pdb) | Should be $false
+			}
+			
 			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll is architecture x86" {
 				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Agent.Core.dll | Should Be "X86"
+			}
+			
+			It "checks to see if content\newrelic\NewRelic.Agent.Extensions.dll exists" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Extensions.dll) | Should be $true
 			}
 			
 			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll is set to version $agentVersion" {
@@ -43,6 +55,31 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			It "checks to see if content\newrelic\extensions\extension.xml exists" {
 				(Test-Path $PackageRoot\content\newrelic\extensions\extension.xsd) | Should Be $true
 			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Default\NewRelic.Providers.TransactionContext.Default.Repacked.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Default\NewRelic.Agent.Extensions.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Default\NewRelic.Agent.Extensions.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Asp\NewRelic.Providers.TransactionContext.Asp.Repacked.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Asp\NewRelic.Providers.TransactionContext.Asp.Repacked.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Asp\NewRelic.Agent.Extensions.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Asp\NewRelic.Agent.Extensions.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Wcf3\NewRelic.Providers.TransactionContext.Wcf3.Repacked.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Wcf3\NewRelic.Providers.TransactionContext.Wcf3.Repacked.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\Extensions\Providers\TransactionContext\Wcf3\NewRelic.Agent.Extensions.dll" {
+				(Test-Path content\newrelic\Extensions\Providers\TransactionContext\Wcf3\NewRelic.Agent.Extensions.dll) | Should Be $true
+			}
+			
 		}
 		
 		Context "When newrelic.config has not been applied to the application" {

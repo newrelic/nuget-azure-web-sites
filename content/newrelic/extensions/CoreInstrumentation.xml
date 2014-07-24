@@ -175,6 +175,25 @@
       </match>
     </tracerFactory>
 
+    <!-- Microsoft Message Queue (MSMQ) -->
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageSendTracerFactory">
+      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+        <exactMethodMatcher methodName="SendInternal" />
+      </match>
+    </tracerFactory>
+
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageReceiveTracerFactory">
+      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+        <exactMethodMatcher methodName="ReceiveCurrent" />
+      </match>
+    </tracerFactory>
+
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageQueuePurgeTracerFactory">
+      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+        <exactMethodMatcher methodName="Purge" />
+      </match>
+    </tracerFactory>
+
     <!-- NET external calls -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestTracerFactory">

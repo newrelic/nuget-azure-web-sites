@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The documentation in here must be kept up to date with that embedded in comments in newrelic.xml -->
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:newrelic-config">
+<!-- The documentation in here must be kept up to date with that embedded in comments in newrelic.config -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:newrelic-config"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nr="Configuration.xsd">
   <xs:element name="configuration">
+
     <xs:complexType>
       <xs:all>
         <xs:element name="service" minOccurs="1" maxOccurs="1">
@@ -324,14 +326,52 @@
           </xs:complexType>
         </xs:element>
 
-        <!-- A parameter group is a container for a set of data values captured by the agent. -->
+
+        <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The attributes element tells the transaction tracer, error collector, browser monitoring and transaction events whether or not to capture any attributes.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="include" type="xs:string">
+                  <xs:annotation>
+                    <xs:documentation>
+                      The name of a specific custom attribute to include.
+                    </xs:documentation>
+                  </xs:annotation>
+                </xs:element>
+              </xs:sequence>
+              <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="exclude" type="xs:string">
+                  <xs:annotation>
+                    <xs:documentation>
+                      The name of a specific custom attribute to exclude.
+                    </xs:documentation>
+                  </xs:annotation>
+                </xs:element>
+              </xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="enabled" type="xs:boolean" default="true">
+              <xs:annotation>
+                <xs:documentation>
+                  Turns on attribute capturing.  Enabled by default.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- DEPRECATED: A parameter group is a container for a set of data values captured by the agent. -->
         <xs:element name="parameterGroups" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:all>
               <xs:element name="identityParameters" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>
-                    The identityParameters element tells the transaction tracer and the error collector
+                    Deprecated: The identityParameters element tells the transaction tracer and the error collector
                     whether or not to capture data from the Principal associated with the application.
                     See http://msdn.microsoft.com/en-us/library/axt6w9h8.aspx for information on the
                     concept of Principal Microsoft Windows.
@@ -343,16 +383,16 @@
                     <xs:element name="ignore" type="xs:string">
                       <xs:annotation>
                         <xs:documentation>
-                          The name of a specific identity parameter to not capture.
+                          Deprecated: The name of a specific identity parameter to not capture.
                         </xs:documentation>
                       </xs:annotation>
                     </xs:element>
                   </xs:sequence>
 
-                  <xs:attribute name="enabled" type="xs:boolean" default="true">
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
                     <xs:annotation>
                       <xs:documentation>
-                        Turns on identity parameter capturing for the Transaction Tracer and Error Collector features.
+                        Deprecated: Turns on identity parameter capturing for the Transaction Tracer and Error Collector features. Default is true.
                       </xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
@@ -362,7 +402,7 @@
               <xs:element name="responseHeaderParameters" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>
-                    The responseHeaderParameters element tells the transaction tracer and the error collector
+                    Deprecated: The responseHeaderParameters element tells the transaction tracer and the error collector
                     whether or not to capture data from the HTTP response.
                   </xs:documentation>
                 </xs:annotation>
@@ -372,16 +412,16 @@
                     <xs:element name="ignore" type="xs:string">
                       <xs:annotation>
                         <xs:documentation>
-                          The name of a specific response header parameter to not capture.
+                          Deprecated: The name of a specific response header parameter to not capture.
                         </xs:documentation>
                       </xs:annotation>
                     </xs:element>
                   </xs:sequence>
 
-                  <xs:attribute name="enabled" type="xs:boolean" default="true">
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
                     <xs:annotation>
                       <xs:documentation>
-                        Turns on response header parameter capturing for the Transaction Tracer and Error Collector features.
+                        Deprecated: Turns on response header parameter capturing for the Transaction Tracer and Error Collector features.  Default is true.
                       </xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
@@ -391,7 +431,7 @@
               <xs:element name="customParameters" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>
-                    The customParameters element tells the transaction tracer and the error collector
+                    Deprecated: The customParameters element tells the transaction tracer and the error collector
                     whether or not to capture custom parameters set using the .NET Agent Api.
                   </xs:documentation>
                 </xs:annotation>
@@ -401,15 +441,15 @@
                     <xs:element name="ignore" type="xs:string">
                       <xs:annotation>
                         <xs:documentation>
-                          The name of a specific custom parameter to not capture.
+                         Deprecated: The name of a specific custom parameter to not capture.
                         </xs:documentation>
                       </xs:annotation>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="enabled" type="xs:boolean" default="true">
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
                     <xs:annotation>
                       <xs:documentation>
-                        Turns on custom parameter capturing for the Transaction Tracer and Error Collector features.
+                        Deprecated: Turns on custom parameter capturing for the Transaction Tracer and Error Collector features.  Default is true.
                       </xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
@@ -419,7 +459,7 @@
               <xs:element name="requestHeaderParameters" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>
-                      The requestHeaderParameters element tells the transaction tracer and the error collector whether or not to capture request headers set.
+                      Deprecated: The requestHeaderParameters element tells the transaction tracer and the error collector whether or not to capture request headers set.
                   </xs:documentation>
                 </xs:annotation>
 
@@ -428,15 +468,15 @@
                     <xs:element name="ignore" type="xs:string">
                       <xs:annotation>
                         <xs:documentation>
-                          The name of a specific request header to not capture.
+                          Deprecated: The name of a specific request header to not capture.
                         </xs:documentation>
                       </xs:annotation>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="enabled" type="xs:boolean" default="true">
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
                     <xs:annotation>
                       <xs:documentation>
-                        Turns on request header capturing for the Transaction Tracer and Error Collector features.
+                        Deprecated: Turns on request header capturing for the Transaction Tracer and Error Collector features. Default is true.
                       </xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
@@ -446,7 +486,7 @@
                 <xs:element name="serviceRequestParameters" minOccurs="0" maxOccurs="1">
                     <xs:annotation>
                         <xs:documentation>
-                            The serviceRequestParameters element tells the transaction tracer and the error collector whether or not to capture service request parameters sent.
+                            Deprecated: The serviceRequestParameters element tells the transaction tracer and the error collector whether or not to capture service request parameters sent.
                         </xs:documentation>
                     </xs:annotation>
 
@@ -455,15 +495,15 @@
                             <xs:element name="ignore" type="xs:string">
                                 <xs:annotation>
                                     <xs:documentation>
-                                        The name of a specific service request parameter to not capture.
+                                        Deprecated: The name of a specific service request parameter to not capture.
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                         </xs:sequence>
-                        <xs:attribute name="enabled" type="xs:boolean" default="false">
+                        <xs:attribute name="enabled" type="xs:boolean" use="optional">
                             <xs:annotation>
                                 <xs:documentation>
-                                    Turns on service request parameter capturing for the Transaction Tracer and Error Collector features.
+                                    Deprecated: Turns on service request parameter capturing for the Transaction Tracer and Error Collector features.  Default is false.
                                 </xs:documentation>
                             </xs:annotation>
                         </xs:attribute>
@@ -493,17 +533,70 @@
               </xs:element>
             </xs:sequence>
 
-            <xs:attribute name="enabled" type="xs:boolean" default="false">
+            <xs:attribute name="enabled" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Turns on request parameter capturing for the Transaction Tracer and Error Collector features.
+                  Turns on request parameter capturing for the Transaction Tracer and Error Collector features.  Default is false.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
 
           </xs:complexType>
         </xs:element>
+        
         <xs:element name="analyticsEvents" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Deprecated: Collects semi-detailed information about various events that occur in an application.
+            </xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="transactions" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        Deprecated: Turns event recording of transaction events on or off. Defaults to true.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+            <xs:attribute name="enabled" type="xs:boolean" use="optional">
+              <xs:annotation>
+                <xs:documentation>
+                  Deprecated: Turns the event recorder on or off. Defaults to true.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maximumSamplesPerMinute" type="xs:unsignedInt" use="optional">
+              <xs:annotation>
+                <xs:documentation>
+                  Deprecated: The maximum number of samples to send per minute.  It is possible that fewer events will be sent, but never more.  Default is 10000.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maximumSamplesStored" type="xs:unsignedInt" use="optional">
+              <xs:annotation>
+                <xs:documentation>
+                  Deprecated: The maximum number of samples to store in memory at a time.  Default is 10000.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
+              <xs:annotation>
+                <xs:documentation>
+                  Deprecated: Include custom parameters in transaction analytics events.  Defaults to true.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="transactionEvents" minOccurs="0" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>
               Collects semi-detailed information about various events that occur in an application.
@@ -514,47 +607,78 @@
             <xs:all>
               <xs:element name="transactions" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                  <xs:attribute name="enabled" type="xs:boolean" default="true">
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
                     <xs:annotation>
                       <xs:documentation>
-                        Turns event recording of transaction events on or off.
+                        Turns event recording of transaction events on or off.  Default is true.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="include" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to include in the transaction events.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="exclude" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to exclude in the transaction events.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:sequence>
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        Turns on custom attribute capturing for Transaction Events
                       </xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:all>
-            <xs:attribute name="enabled" type="xs:boolean" default="true">
+            <xs:attribute name="enabled" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Turns the event recorder on or off.
+                  Turns the event recorder on or off.  Default is true.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="maximumSamplesPerMinute" type="xs:unsignedInt" default="10000">
+            <xs:attribute name="maximumSamplesPerMinute" type="xs:unsignedInt" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  The maximum number of samples to send per minute.  It is possible that fewer events will be sent, but never more.
+                  The maximum number of samples to send per minute.  It is possible that fewer events will be sent, but never more.  Default is 10000.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="maximumSamplesStored" type="xs:unsignedInt" default="10000">
+            <xs:attribute name="maximumSamplesStored" type="xs:unsignedInt" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  The maximum number of samples to store in memory at a time.
+                  The maximum number of samples to store in memory at a time.  Default is 10000.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="captureAttributes" type="xs:boolean" default="true">
+            <xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Include custom parameters in transaction analytics events.
+                  Include custom parameters in transaction analytics events.  Default is true.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
           </xs:complexType>
         </xs:element>
-
+        
         <xs:element name="transactionTracer" minOccurs="0" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>
@@ -564,8 +688,43 @@
               the transactions including any SQL statements issued.
             </xs:documentation>
           </xs:annotation>
-
           <xs:complexType>
+            <xs:sequence>
+              
+              <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="include" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to include in the transaction traces.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="exclude" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to exclude in the transaction traces.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:sequence>
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        Turns on custom attribute capturing for Transaction Traces
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              
+            </xs:sequence>
+            
             <xs:attribute name="transactionThreshold" type="xs:string" default="apdex_f">
               <xs:annotation>
                 <xs:documentation>
@@ -627,7 +786,7 @@
             <xs:attribute name="enabled" type="xs:boolean" default="true">
               <xs:annotation>
                 <xs:documentation>
-                  The transaction tracer is available only in the Professional product version.
+                  Deprecated: The transaction tracer is available only in the Professional product version.
                   It is enabled by default.
                   Set this to false to turn it off.
                 </xs:documentation>
@@ -644,6 +803,7 @@
               Increasing the stack trace size, for example, will bloat memory.
               If they send Transaction Traces to our service that are too large because of it we'll simply reject them.
             -->
+            
             <xs:attribute name="maxSegments" type="xs:int" default="3000">
               <xs:annotation>
                 <xs:documentation>
@@ -668,10 +828,10 @@
               </xs:annotation>
             </xs:attribute>
             
-            <xs:attribute name="captureAttributes" type="xs:boolean" default="true">
+            <xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Include user custom parameters in transaction traces.
+                  Deprecated: Include user custom parameters in transaction traces.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
@@ -791,6 +951,38 @@
                 </xs:complexType>
               </xs:element>
 
+              <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="include" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to include in the error trace.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="exclude" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to exclude in the error trace.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:sequence>
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        Turns on custom attribute capturing for the Error Collector.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+
             </xs:sequence>
 
             <xs:attribute name="enabled" type="xs:boolean" default="true">
@@ -803,10 +995,10 @@
               </xs:annotation>
             </xs:attribute>
 
-            <xs:attribute name="captureAttributes" type="xs:boolean" default="true">
+            <xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Include user custom parameters in traced errors.
+                  Deprecated: Include user custom parameters in traced errors. Defaults to true.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
@@ -826,6 +1018,7 @@
 
           <xs:complexType>
             <xs:sequence>
+              
               <xs:element name="requestPathsExcluded" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>
@@ -858,6 +1051,39 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+
+              <xs:element name="attributes" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="include" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to include in browser monitoring.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                      <xs:element name="exclude" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>
+                            The name of a specific custom attribute to exclude in browser monitoring.
+                          </xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:sequence>
+                  <xs:attribute name="enabled" type="xs:boolean" use="optional">
+                    <xs:annotation>
+                      <xs:documentation>
+                        Turns on custom attribute capturing for Browser Monitoring
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+ 
             </xs:sequence>
 
             <xs:attribute name="autoInstrument" type="xs:boolean" default="true">
@@ -889,10 +1115,10 @@
               </xs:annotation>
             </xs:attribute>
 
-            <xs:attribute name="captureAttributes" type="xs:boolean" default="false">
+            <xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
               <xs:annotation>
                 <xs:documentation>
-                  Include user custom parameters in the RUM client configuration.
+                  Deprecated: Include user custom parameters in the RUM client configuration. Defaults to false.
                 </xs:documentation>
               </xs:annotation>
             </xs:attribute>
@@ -1020,6 +1246,6 @@
         </xs:simpleType>
       </xs:attribute>
 
-    </xs:complexType>
+    </xs:complexType>    
   </xs:element>
 </xs:schema>

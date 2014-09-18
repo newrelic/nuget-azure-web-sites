@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><!-- Copyright (c) 2008-2014 New Relic, Inc.  All rights reserved. --><!--
-    When you edit this file, please use an XML aware editor (such as Visual Studio),
-    and pair with the companion file extension.xsd to minimize the
-    chance of introducing typos that may confuse the agent when it is run.
+	When you edit this file, please use an XML aware editor (such as Visual Studio),
+	and pair with the companion file extension.xsd to minimize the
+	chance of introducing typos that may confuse the agent when it is run.
 --><extension xmlns="urn:newrelic-extension">
 	<instrumentation>
 
@@ -168,33 +168,33 @@
 			</match>
 		</tracerFactory>
 
-    <!-- WCF (Windows Communication Framework) client -->
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WcfInvokeServiceTracerFactory">
-      <match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
-        <exactMethodMatcher methodName="InvokeService" />
-      </match>
-    </tracerFactory>
+		<!-- WCF (Windows Communication Framework) client -->
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WcfInvokeServiceTracerFactory">
+			<match assemblyName="System.ServiceModel" className="System.ServiceModel.Channels.ServiceChannelProxy">
+				<exactMethodMatcher methodName="InvokeService" />
+			</match>
+		</tracerFactory>
 
-    <!-- Microsoft Message Queue (MSMQ) -->
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageSendTracerFactory">
-      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
-        <exactMethodMatcher methodName="SendInternal" />
-      </match>
-    </tracerFactory>
+		<!-- Microsoft Message Queue (MSMQ) -->
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageSendTracerFactory">
+			<match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+				<exactMethodMatcher methodName="SendInternal" />
+			</match>
+		</tracerFactory>
 
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageReceiveTracerFactory">
-      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
-        <exactMethodMatcher methodName="ReceiveCurrent" />
-      </match>
-    </tracerFactory>
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageReceiveTracerFactory">
+			<match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+				<exactMethodMatcher methodName="ReceiveCurrent" />
+			</match>
+		</tracerFactory>
 
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageQueuePurgeTracerFactory">
-      <match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
-        <exactMethodMatcher methodName="Purge" />
-      </match>
-    </tracerFactory>
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.MessageQueues.MessageQueuePurgeTracerFactory">
+			<match assemblyName="System.Messaging" className="System.Messaging.MessageQueue">
+				<exactMethodMatcher methodName="Purge" />
+			</match>
+		</tracerFactory>
 
-    <!-- NET external calls -->
+		<!-- NET external calls -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">

@@ -2,7 +2,6 @@
 <!-- The documentation in here must be kept up to date with that embedded in comments in newrelic.config -->
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:newrelic-config" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nr="Configuration.xsd">
 	<xs:element name="configuration">
-
 		<xs:complexType>
 			<xs:all>
 				<xs:element name="service" minOccurs="1" maxOccurs="1">
@@ -302,7 +301,6 @@
 
 					</xs:complexType>
 				</xs:element>
-
 
 				<xs:element name="attributes" minOccurs="0" maxOccurs="1">
 					<xs:annotation>
@@ -1136,6 +1134,12 @@
 							<xs:element name="ignoreMethod" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
 						</xs:sequence>
 					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="labels" minOccurs="0" maxOccurs="1" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Labels allow you to tag your applications so you can filter them in APM.</xs:documentation>
+					</xs:annotation>
 				</xs:element>
 			</xs:all>
 

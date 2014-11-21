@@ -202,7 +202,7 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory enable="true" name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Net.HttpWebRequestSerializeHeadersTracerFactory">
 			<match assemblyName="System" className="System.Net.HttpWebRequest">
 				<exactMethodMatcher methodName="SerializeHeaders" />
 			</match>

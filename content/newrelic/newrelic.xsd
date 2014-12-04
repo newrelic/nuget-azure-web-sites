@@ -641,13 +641,6 @@
 								</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
-						<xs:attribute name="captureAttributes" type="xs:boolean" use="optional">
-							<xs:annotation>
-								<xs:documentation>
-									Include custom parameters in transaction analytics events.	Default is true.
-								</xs:documentation>
-							</xs:annotation>
-						</xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				

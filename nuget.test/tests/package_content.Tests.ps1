@@ -4,52 +4,39 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "3.11.283.0"
+		$agentVersion = "3.11.296.0"
 		
 		Context "When package exists" {
-			$newRelicHome = "$PackageRoot\content\newrelic";
-			$expectedFiles = @(
-				"$newRelicHome\newrelic.config",
-				"$newRelicHome\NewRelic.Agent.Core.dll",
-				"$newRelicHome\NewRelic.Profiler.dll",
-				"$newRelicHome\NewRelic.Agent.Extensions.dll",
-				"$newRelicHome\newrelic.xsd",
-				"$newRelicHome\extensions\CoreInstrumentation.xml",
-				"$newRelicHome\extensions\extension.xsd",
-				"$newRelicHome\extensions\NewRelic.Providers.TransactionContext.Asp.dll",
-				"$newRelicHome\extensions\NewRelic.Providers.TransactionContext.Default.dll",
-				"$newRelicHome\extensions\NewRelic.Providers.TransactionContext.Wcf3.dll",
-				"$newRelicHome\extensions\NewRelic.Providers.Wrapper.NServiceBus.dll",
-				"$newRelicHome\extensions\NewRelic.Providers.Wrapper.NServiceBus.Instrumentation.xml"
-			);
-			$actualFiles = Get-ChildItem -Rec -Path $newRelicHome |
-					Where-Object {!($_.PSIsContainer)} |
-					ForEach-Object -Process {$_.FullName};
-			
-			It "has all expected files in home directory" {
-				$missingFiles = $expectedFiles | Where-Object {!($actualFiles -Contains $_)}
-				
-				if ($missingFiles.length -gt 0) {
-					$filesString = [string]::join("','", $missingFiles);				
-					throw "Could not find expected file(s) '$filesString'";
-				}
+			It "checks to see if content\newrelic.config exists" {
+				(Test-Path $PackageRoot\content\newrelic\newrelic.config) | Should Be $true
 			}
 			
-			It "has no unexpected files in home directory" {			
-				$unexpectedFiles = $actualFiles | Where-Object {!($expectedFiles -Contains $_)}
-				
-				if ($unexpectedFiles.length -gt 0) {
-					$filesString = [string]::join("','", $unexpectedFiles);				
-					throw "Found unexpected file(s) '$filesString'";
-				}
+			It "checks to see if content\newrelic.xsd exists" {
+				(Test-Path $PackageRoot\content\newrelic\newrelic.config) | Should be $true
+			}
+			
+			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll exists" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Core.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\NewRelic.Agent.Core.pdb does not exist" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Core.pdb) | Should be $false
 			}
 			
 			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll is architecture x86" {
 				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Agent.Core.dll | Should Be "X86"
 			}
 			
+			It "checks to see if content\newrelic\NewRelic.Agent.Extensions.dll exists" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Agent.Extensions.dll) | Should be $true
+			}
+			
 			It "checks to see if content\newrelic\NewRelic.Agent.Core.dll is set to version $agentVersion" {
 				[System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PackageRoot\content\newrelic\NewRelic.Agent.Core.dll").FileVersion | Should be $agentVersion
+			}
+			
+			It "checks to see if content\newrelic\NewRelic.Profiler.dll exists" {
+				(Test-Path $PackageRoot\content\newrelic\NewRelic.Profiler.dll) | Should Be $true
 			}
 			
 			It "checks to see if content\newrelic\NewRelic.Profiler.dll is set to version $agentVersion" {
@@ -58,6 +45,27 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			
 			It "checks to see if content\newrelic\NewRelic.Profiler.dll is architecture x86" {
 				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Profiler.dll | Should Be "X86"
+			}
+			
+			
+			It "checks to see if content\newrelic\extensions\CoreInstrumentation.xml exists" {
+				(Test-Path $PackageRoot\content\newrelic\extensions\CoreInstrumentation.xml) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\extensions\extension.xml exists" {
+				(Test-Path $PackageRoot\content\newrelic\extensions\extension.xsd) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\extensions\NewRelic.Providers.TransactionContext.Asp.dll" {
+				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Asp.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\extensions\NewRelic.Providers.TransactionContext.Default.dll" {
+				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Default.dll) | Should Be $true
+			}
+			
+			It "checks to see if content\newrelic\extensions\NewRelic.Providers.TransactionContext.Wcf3.dll" {
+				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Wcf3.dll) | Should Be $true
 			}
 		}
 		

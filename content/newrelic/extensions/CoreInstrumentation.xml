@@ -5,34 +5,6 @@
 --><extension xmlns="urn:newrelic-extension">
 	<instrumentation>
 
-		<!-- Optional for basic traces. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.RouteDataTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.Routing.RouteCollection">
-				<exactMethodMatcher methodName="GetRouteData" parameters="System.Web.HttpContextBase" />
-			</match>
-		</tracerFactory>
-
-		<!-- hook up the request listener -->
-		<!-- Mandatory for basic traces. -->
-		<!-- Special case.  See internal implementation of dynamic dispatcher for details. -->
-		<tracerFactory metricName="NewRelic.Agent.Core.Tracer.Factories.Web.InitModuleTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.HttpApplication">
-				<exactMethodMatcher methodName="InitModulesCommon" />
-				<exactMethodMatcher methodName="RegisterEventSubscriptionsWithIIS" />
-			</match>
-		</tracerFactory>
-
-		<!-- report the request pipeline steps -->
-		<!-- Mandatory for basic traces. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ExecutionPipelineStepTracerFactory" level="2" metric="none" enabled="false">
-			<match assemblyName="System.Web" className="System.Web.HttpApplication">
-				<exactMethodMatcher methodName="ExecuteStep" parameters="IExecutionStep,System.Boolean&amp;" />
-			</match>
-			<match assemblyName="System.Web" className="System.Web.HttpApplication+MapHandlerExecutionStep">
-				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" />
-			</match>
-		</tracerFactory>
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ReleaseAppInstanceTracerFactory">
 			<match assemblyName="System.Web" className="System.Web.HttpApplication">
 				<exactMethodMatcher methodName="ReleaseAppInstance" />
@@ -56,7 +28,7 @@
 			</match>
 		</tracerFactory>
 
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ASPProcessRequestTracerFactory" transactionNamingPriority="3">
+		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ASPProcessRequestTracerFactory" transactionNamingPriority="6">
 			<!-- ASP pages -->
 			<match assemblyName="System.Web" className="System.Web.UI.Page">
 				<exactMethodMatcher methodName="ProcessRequest" parameters="System.Boolean,System.Boolean" />
@@ -84,41 +56,6 @@
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.IgnoreTransactionTracerFactory">
 			<match assemblyName="System.Web.Extensions" className="System.Web.Handlers.ScriptResourceHandler">
 				<exactMethodMatcher methodName="Throw404" />
-			</match>
-		</tracerFactory>
-
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.CallHandlerExecutionTracerFactory" transactionNamingPriority="2">
-			<match assemblyName="System.Web" className="System.Web.HttpApplication+CallHandlerExecutionStep">
-				<exactMethodMatcher methodName="System.Web.HttpApplication.IExecutionStep.Execute" />
-			</match>
-		</tracerFactory>
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.RUM.BrowserTagTracerFactory" enabled="false">
-			<match assemblyName="System.Web" className="System.Web.UI.Control">
-				<exactMethodMatcher methodName="RenderControl" parameters="System.Web.UI.HtmlTextWriter,System.Web.UI.Adapters.ControlAdapter" />
-			</match>
-			<match assemblyName="System.Web" className="System.Web.UI.LiteralControl">
-				<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />
-			</match>
-		</tracerFactory>
-
-		<!-- MVC Exception Reporting -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.MvcExceptionFilterTracerFactory">
-			<match assemblyName="System.Web.Mvc" className="System.Web.Mvc.ControllerActionInvoker">
-				<exactMethodMatcher methodName="InvokeExceptionFilters" parameters="System.Web.Mvc.ControllerContext,System.Collections.Generic.IList`1[System.Web.Mvc.IExceptionFilter],System.Exception" />
-			</match>
-		</tracerFactory>
-
-		<!-- MVC controller/action -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.MvcControllerActionInvokerTracerFactory">
-			<match assemblyName="System.Web.Mvc" className="System.Web.Mvc.ControllerActionInvoker">
-				<exactMethodMatcher methodName="GetFilters" />
-			</match>
-		</tracerFactory>
-
-		<!-- WebAPI controller/action -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.WebApiControllerActionInvokerTracerFactory">
-			<match assemblyName="System.Web.Http" className="System.Web.Http.Controllers.ApiControllerActionInvoker">
-				<exactMethodMatcher methodName="InvokeActionAsync" />
 			</match>
 		</tracerFactory>
 

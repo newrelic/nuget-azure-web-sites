@@ -1134,6 +1134,25 @@
 						<xs:documentation>Labels allow you to tag your applications so you can filter them in APM.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+
+				<xs:element name="appSettings" minOccurs="0" maxOccurs="1" >
+					<xs:complexType>
+						<xs:annotation>
+							<xs:documentation>
+								List any additional New Relic settings here using the typical key/value form.
+							</xs:documentation>
+						</xs:annotation>
+
+						<xs:sequence>
+							<xs:element name="add" minOccurs="0" maxOccurs="unbounded" >
+								<xs:complexType>
+									<xs:attribute name="key" type="xs:string"></xs:attribute>
+									<xs:attribute name="value" type="xs:string"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 			</xs:all>
 
 			<xs:attribute name="agentEnabled" type="xs:boolean" default="true">

@@ -38,5 +38,11 @@
 			</match>
 		</tracerFactory>
 
+		<tracerFactory>
+			<match assemblyName="System.Web" className="System.Web.Handlers.AssemblyResourceLoader">
+				<exactMethodMatcher methodName="System.Web.IHttpHandler.ProcessRequest" />
+			</match>
+		</tracerFactory>
+
 	</instrumentation>
 </extension>

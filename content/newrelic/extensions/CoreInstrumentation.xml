@@ -11,14 +11,6 @@
 			</match>
 		</tracerFactory>
 
-		<!-- agent shutdown hook -->
-		<!-- Mandatory for traces to work. -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.HttpApplicationEndTracerFactory">
-			<match assemblyName="System.Web" className="System.Web.HttpApplicationFactory">
-				<exactMethodMatcher methodName="FireApplicationOnEnd" />
-			</match>
-		</tracerFactory>
-
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Web.ScriptHandlerFactoryTracerFactory" transactionNamingPriority="3">
 			<match assemblyName="System.Web.Extensions" className="System.Web.Script.Services.ScriptHandlerFactory+HandlerWrapper">
 				<exactMethodMatcher methodName="ProcessRequest" parameters="System.Web.HttpContext" />

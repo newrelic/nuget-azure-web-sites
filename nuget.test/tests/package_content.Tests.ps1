@@ -39,14 +39,9 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				(Test-Path $PackageRoot\content\newrelic\NewRelic.Profiler.dll) | Should Be $true
 			}
 			
-			It "checks to see if content\newrelic\NewRelic.Profiler.dll is set to version $agentVersion" {
-				[System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PackageRoot\content\newrelic\NewRelic.Profiler.dll").FileVersion | Should be $agentVersion
-			}
-			
 			It "checks to see if content\newrelic\NewRelic.Profiler.dll is architecture x86" {
 				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Profiler.dll | Should Be "X86"
 			}
-			
 			
 			It "checks to see if content\newrelic\extensions\CoreInstrumentation.xml exists" {
 				(Test-Path $PackageRoot\content\newrelic\extensions\CoreInstrumentation.xml) | Should Be $true

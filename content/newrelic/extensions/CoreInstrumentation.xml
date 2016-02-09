@@ -80,13 +80,16 @@
 
 		<!-- command methods -->
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.DbCommandExecuteReaderTracerFactory">
-			<match assemblyName="System.Data" className="System.Data.SqlClient.SqlCommand,System.Data.OleDb.OleDbCommand,System.Data.Odbc.OdbcCommand">
-				<exactMethodMatcher methodName="ExecuteReader" />
+			<match assemblyName="System.Data" className="System.Data.OleDb.OleDbCommand,System.Data.Odbc.OdbcCommand">
+				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior" />
 				<exactMethodMatcher methodName="ExecuteNonQuery" />
 				<exactMethodMatcher methodName="ExecuteScalar" />
 			</match>
 
 			<match assemblyName="System.Data" className="System.Data.SqlClient.SqlCommand">
+				<exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior,System.String" />
+				<exactMethodMatcher methodName="ExecuteNonQuery" />
+				<exactMethodMatcher methodName="ExecuteScalar" />
 				<exactMethodMatcher methodName="ExecuteXmlReader" />
 			</match>
 

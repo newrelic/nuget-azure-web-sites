@@ -33,13 +33,6 @@
 			</match>
 		</tracerFactory>
 
-		<!-- Ignore 404s thrown from the ScriptResourceHandler -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.IgnoreTransactionTracerFactory">
-			<match assemblyName="System.Web.Extensions" className="System.Web.Handlers.ScriptResourceHandler">
-				<exactMethodMatcher methodName="Throw404" />
-			</match>
-		</tracerFactory>
-
 		<!-- **************************  WEB SERVICES  ***************************** -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WebServiceMethodTracerFactory" transactionNamingPriority="5">

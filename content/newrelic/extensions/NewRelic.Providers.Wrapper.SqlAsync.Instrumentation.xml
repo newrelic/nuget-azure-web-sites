@@ -10,6 +10,15 @@
         <exactMethodMatcher methodName="ExecuteScalarAsync" parameters="System.Threading.CancellationToken" />
         <exactMethodMatcher methodName="ExecuteXmlReaderAsync" parameters="System.Threading.CancellationToken" />
       </match>
+
+      <!-- Oracle vendor driver for ManagedDataAccess -->
+      <!-- MySql (official) driver -->
+      <!-- We get async instrumentation of these for free because the implementations eventually call back into synchronous methods -->
+
+      <!-- Npgsql Postgres data provider -->
+      <match assemblyName="Npgsql" className="Npgsql.NpgsqlCommand">
+        <exactMethodMatcher methodName="ExecuteAsync"/>
+      </match>
     </tracerFactory>
 
     <tracerFactory enabled="false">

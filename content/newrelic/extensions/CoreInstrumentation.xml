@@ -5,19 +5,6 @@
 --><extension xmlns="urn:newrelic-extension">
 	<instrumentation>
 
-		<tracerFactory>
-			<match assemblyName="System.Web" className="System.Web.UI.Page">
-				<!--<exactMethodMatcher methodName="Render" parameters="System.Web.UI.HtmlTextWriter" />-->
-				<exactMethodMatcher methodName="PerformPreInit" />
-			</match>
-			<match assemblyName="System.Web" className="System.Web.Compilation.AssemblyBuilder">
-				<exactMethodMatcher methodName="Compile" />
-			</match>
-			<match assemblyName="System.Web" className="System.Web.Compilation.BuildManager">
-				<exactMethodMatcher methodName="CompileWebFile" />
-			</match>
-		</tracerFactory>
-
 		<!-- **************************  WEB SERVICES  ***************************** -->
 
 		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.ServiceModel.WebServiceMethodTracerFactory" transactionNamingPriority="5">
@@ -182,13 +169,6 @@
 		<tracerFactory>
 			<match assemblyName="DotNetNuke" className="DotNetNuke.Framework.PageBase">
 				<exactMethodMatcher methodName="Render" />
-			</match>
-		</tracerFactory>
-
-		<!-- **************************  OpenRasta  ***************************** -->
-		<tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Frameworks.OpenRasta.OpenRastaHandlerTracerFactory" transactionNamingPriority="2">
-			<match assemblyName="OpenRasta.Hosting.AspNet" className="OpenRasta.Hosting.AspNet.OpenRastaHandler">
-				<exactMethodMatcher methodName="GetHandler" />
 			</match>
 		</tracerFactory>
 	</instrumentation>

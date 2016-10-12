@@ -66,6 +66,14 @@
         <exactMethodMatcher methodName="ExecuteNonQuery" />
         <exactMethodMatcher methodName="ExecuteScalar" />
       </match>
+
+      <!-- IBM DB2 driver -->
+      <match assemblyName="IBM.Data.DB2" className="IBM.Data.DB2.DB2Command">
+        <exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior"/>
+        <exactMethodMatcher methodName="ExecuteNonQuery" />
+        <exactMethodMatcher methodName="ExecuteScalar" />
+        <exactMethodMatcher methodName="ExecuteXmlReader"/>
+      </match>
     </tracerFactory>
 
     <!-- DataReader methods. DISABLED by default due to possible performance impact. Set enabled to "true" (or omit completely) to enable this instrumentation. -->
@@ -109,6 +117,12 @@
         <exactMethodMatcher methodName="NextResult" />
         <exactMethodMatcher methodName="Read" />
       </match>
+      
+      <!-- IBM DB2 driver -->
+      <match assemblyName="IBM.Data.DB2" className="IBM.Data.DB2.DB2DataReader">
+        <exactMethodMatcher methodName="NextResult" />
+        <exactMethodMatcher methodName="Read" />
+      </match>
     </tracerFactory>
 
     <!-- DbConnection.Open() -->
@@ -140,6 +154,11 @@
 
       <!-- Npgsql Postgres data provider -->
       <match assemblyName="Npgsql" className="Npgsql.NpgsqlConnection">
+        <exactMethodMatcher methodName="Open"/>
+      </match>
+
+      <!-- IBM DB2 driver -->
+      <match assemblyName="IBM.Data.DB2" className="IBM.Data.DB2.DB2Connection">
         <exactMethodMatcher methodName="Open"/>
       </match>
     </tracerFactory>

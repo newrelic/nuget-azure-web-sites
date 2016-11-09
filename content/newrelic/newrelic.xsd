@@ -856,6 +856,43 @@
 					</xs:complexType>
 				</xs:element>
 
+				<xs:element name="datastoreTracer" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:annotation>
+							<xs:documentation>
+								These settings control what type of database information is sent to New Relic.
+							</xs:documentation>
+						</xs:annotation>
+						<xs:sequence>
+
+							<xs:element name="instanceReporting" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="enabled" type="xs:boolean" default="false">
+										<xs:annotation>
+											<xs:documentation>
+												This setting controls whether or not the host and the port, path, or ID are reported for datastores.
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="databaseNameReporting" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="enabled" type="xs:boolean" default="false">
+										<xs:annotation>
+											<xs:documentation>
+												This setting controls whether or not database names are reported for datastores.
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+
 				<xs:element name="crossApplicationTracer" minOccurs="0" maxOccurs="1">
 					<xs:annotation>
 						<xs:documentation>

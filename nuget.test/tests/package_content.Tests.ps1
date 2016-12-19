@@ -4,7 +4,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "6.3.123.0"
+		$agentVersion = "6.4.21.0"
 		
 		Context "When package exists" {
 			It "checks to see if content\newrelic.config exists" {

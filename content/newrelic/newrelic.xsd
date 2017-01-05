@@ -867,7 +867,7 @@
 
 							<xs:element name="instanceReporting" minOccurs="0" maxOccurs="1">
 								<xs:complexType>
-									<xs:attribute name="enabled" type="xs:boolean" default="false">
+									<xs:attribute name="enabled" type="xs:boolean" default="true">
 										<xs:annotation>
 											<xs:documentation>
 												This setting controls whether or not the host and the port, path, or ID are reported for datastores.
@@ -878,7 +878,7 @@
 							</xs:element>
 							<xs:element name="databaseNameReporting" minOccurs="0" maxOccurs="1">
 								<xs:complexType>
-									<xs:attribute name="enabled" type="xs:boolean" default="false">
+									<xs:attribute name="enabled" type="xs:boolean" default="true">
 										<xs:annotation>
 											<xs:documentation>
 												This setting controls whether or not database names are reported for datastores.

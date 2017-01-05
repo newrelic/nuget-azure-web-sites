@@ -4,7 +4,7 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 
     Describe "package_content" {
 		
-		$agentVersion = "6.4.21.0"
+		$agentVersion = "6.5.29.0"
 		
 		Context "When package exists" {
 			It "checks to see if content\newrelic.config exists" {
@@ -39,8 +39,8 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				(Test-Path $PackageRoot\content\newrelic\NewRelic.Profiler.dll) | Should Be $true
 			}
 			
-			It "checks to see if content\newrelic\NewRelic.Profiler.dll is architecture x86" {
-				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Profiler.dll | Should Be "X86"
+			It "checks to see if content\newrelic\NewRelic.Profiler.dll is architecture x64" {
+				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Profiler.dll | Should Be "X64"
 			}
 			
 			It "checks to see if content\newrelic\extensions\CoreInstrumentation.xml exists" {
@@ -106,16 +106,16 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			[xml] $nuspecXml = Get-Content $PackageRoot\*.nuspec
 			$node = $nuspecXml.package.metadata
 		
-			It "Should have id element with value NewRelic.Azure.WebSites" {
-				$node.id | Should be "NewRelic.Azure.WebSites"
+			It "Should have id element with value NewRelic.Azure.WebSites.x64" {
+				$node.id | Should be "NewRelic.Azure.WebSites.x64"
 			}
 			
 			It "Should have version element with value $agentVersion" {
 				$node.version | Should be $agentVersion
 			}
 			
-			It "Should have title element with value New Relic for Windows Azure Web Sites (x86)" {
-				$node.title | Should be "New Relic for Windows Azure Web Sites (x86)"
+			It "Should have title element with value New Relic for Windows Azure Web Sites (x64)" {
+				$node.title | Should be "New Relic for Windows Azure Web Sites (x64)"
 			}
 			
 			It "Should have owners element with value New Relic" {

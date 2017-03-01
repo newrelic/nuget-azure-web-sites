@@ -9,17 +9,17 @@ if ([string]$policy -ine 'Unrestricted'){
 	Set-ExecutionPolicy RemoteSigned -Scope Process
 }
 
-Write-Host $path"\modules\PackageManagement.Cmdlets.dll"
+#Write-Host $path"\modules\PackageManagement.Cmdlets.dll"
 
 $invocation = (Get-Variable MyInvocation).Value
 $directorypath = Split-Path $invocation.MyCommand.Path
-$modulespath = $directorypath + '\modules\PackageManagement\bin\PackageManagement.Cmdlets.dll'
+#$modulespath = $directorypath + '\modules\PackageManagement\bin\PackageManagement.Cmdlets.dll'
 
-Write-Host 'Installing module to help with nuget commands from Powershell located at' + $modulespath
-if(Test-Path $modulespath){
-	Write-Host "***Registering the PackageManagement.Cmdlets.dll module***"
-	Import-Module $modulespath
-}
+#Write-Host 'Installing module to help with nuget commands from Powershell located at' + $modulespath
+#if(Test-Path $modulespath){
+#	Write-Host "***Registering the PackageManagement.Cmdlets.dll module***"
+#	Import-Module $modulespath
+#}
 
 $modulespath = $directorypath + '\modules\PETools'
 Write-Host 'Installing module PETools to help with nuget commands from Powershell located at' + $modulespath

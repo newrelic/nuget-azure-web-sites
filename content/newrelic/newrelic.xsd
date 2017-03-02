@@ -1054,6 +1054,22 @@
 							</xs:annotation>
 						</xs:attribute>
 
+						<xs:attribute name="captureEvents" type="xs:boolean" default="true">
+							<xs:annotation>
+								<xs:documentation>
+										Enable/disable capturing error events.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+
+						<xs:attribute name="maxEventSamplesStored" type="xs:int" default="100">
+							<xs:annotation>
+								<xs:documentation>
+										Reservoir limit for error events. Defaults to 100.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+
 					</xs:complexType>
 				</xs:element>
 

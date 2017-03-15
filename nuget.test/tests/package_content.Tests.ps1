@@ -43,10 +43,6 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				Get-PEArchitecture $PackageRoot\content\newrelic\NewRelic.Profiler.dll | Should Be "X86"
 			}
 			
-			It "checks to see if content\newrelic\extensions\CoreInstrumentation.xml exists" {
-				(Test-Path $PackageRoot\content\newrelic\extensions\CoreInstrumentation.xml) | Should Be $true
-			}
-			
 			It "checks to see if content\newrelic\extensions\extension.xml exists" {
 				(Test-Path $PackageRoot\content\newrelic\extensions\extension.xsd) | Should Be $true
 			}
@@ -140,11 +136,6 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 			$ns = @{ e = "urn:newrelic-config" }
 			$ns = New-Object Xml.XmlNamespaceManager $nuspecXml.NameTable
 			$ns.AddNamespace( "e", "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd" )
-		
-			It "Should have file element for CoreInstrumentation.xml" {
-				$result = $nuspecXml.SelectSingleNode("//e:file[@src = 'content\newrelic\extensions\CoreInstrumentation.xml']", $ns)
-				$result.src | Should be $result.target
-			}
 			
 			It "Should have file element for extension.xsd" {
 				$result = $nuspecXml.SelectSingleNode("//e:file[@src = 'content\newrelic\extensions\extension.xsd']", $ns)

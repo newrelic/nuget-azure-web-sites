@@ -149,7 +149,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\extensions\CoreInstrumentation.xml" />
     <None Include="bin\extensions\extension.xsd" />
     <None Include="bin\logs\README.txt" />
     <None Include="newrelic.config" />

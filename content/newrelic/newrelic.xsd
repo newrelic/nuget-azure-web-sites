@@ -31,6 +31,14 @@
 										</xs:annotation>
 									</xs:attribute>
 
+									<xs:attribute name="uriPath" type="xs:string" use="optional">
+										<xs:annotation>
+											<xs:documentation>
+												The proxy server URI Path (optional).
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+
 									<xs:attribute name="port" type="xs:int" default="8080">
 										<xs:annotation>
 											<xs:documentation>

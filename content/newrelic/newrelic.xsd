@@ -160,6 +160,14 @@
 							</xs:annotation>
 						</xs:attribute>
 
+						<xs:attribute name="completeTransactionsOnThread" type="xs:boolean" default="false">
+							<xs:annotation>
+								<xs:documentation>
+									If true, the Agent will complete transaction processing on the request thread. If false, a pool thread will be used. The default is false.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+
 					</xs:complexType>
 				</xs:element>
 

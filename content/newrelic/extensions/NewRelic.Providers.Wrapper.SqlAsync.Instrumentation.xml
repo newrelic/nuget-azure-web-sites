@@ -3,13 +3,22 @@
   <instrumentation>
 
     <tracerFactory>
-      <!-- built in MS SQL driver -->
+      <!-- built in MS SQL driver (framework) -->
       <match assemblyName="System.Data" className="System.Data.SqlClient.SqlCommand">
         <exactMethodMatcher methodName="ExecuteReaderAsync" parameters="System.Data.CommandBehavior,System.Threading.CancellationToken" />
         <exactMethodMatcher methodName="ExecuteNonQueryAsync" parameters="System.Threading.CancellationToken" />
         <exactMethodMatcher methodName="ExecuteScalarAsync" parameters="System.Threading.CancellationToken" />
         <exactMethodMatcher methodName="ExecuteXmlReaderAsync" parameters="System.Threading.CancellationToken" />
       </match>
+
+      <!-- built in MS SQL driver (core / nuget) -->
+      <match assemblyName="System.Data.SqlClient" className="System.Data.SqlClient.SqlCommand">
+        <exactMethodMatcher methodName="ExecuteReaderAsync" parameters="System.Data.CommandBehavior,System.Threading.CancellationToken" />
+        <exactMethodMatcher methodName="ExecuteNonQueryAsync" parameters="System.Threading.CancellationToken" />
+        <exactMethodMatcher methodName="ExecuteScalarAsync" parameters="System.Threading.CancellationToken" /> 
+        <exactMethodMatcher methodName="ExecuteXmlReaderAsync" parameters="System.Threading.CancellationToken" />
+      </match>
+
 
       <!-- Oracle vendor driver for ManagedDataAccess -->
       <!-- MySql (official) driver -->
@@ -26,6 +35,13 @@
         <exactMethodMatcher methodName="NextResultAsync" />
         <exactMethodMatcher methodName="ReadAsync" />
       </match>
+
+      <!-- built in MS SQL driver (core / nuget) -->
+      <match assemblyName="System.Data.SqlClient" className="System.Data.SqlClient.SqlDataReader">
+        <exactMethodMatcher methodName="NextResultAsync" />
+        <exactMethodMatcher methodName="ReadAsync" />
+      </match>
+
     </tracerFactory>
     
   </instrumentation>

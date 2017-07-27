@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <extension xmlns="urn:newrelic-extension">
   <instrumentation>
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.DbCommandExecuteReaderTracerFactory">
+    <tracerFactory>
 
-      <!-- built in MS SQL driver -->
+      <!-- built in MS SQL driver (framework) -->
       <match assemblyName="System.Data" className="System.Data.SqlClient.SqlCommand">
         <exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior,System.String" />
+        <exactMethodMatcher methodName="ExecuteNonQuery" />
+        <exactMethodMatcher methodName="ExecuteScalar" />
+        <exactMethodMatcher methodName="ExecuteXmlReader" />
+      </match>
+
+      <!-- built in MS SQL driver (core / nuget) -->
+      <match assemblyName="System.Data.SqlClient" className="System.Data.SqlClient.SqlCommand">
+        <exactMethodMatcher methodName="ExecuteReader" parameters="System.Data.CommandBehavior" />
         <exactMethodMatcher methodName="ExecuteNonQuery" />
         <exactMethodMatcher methodName="ExecuteScalar" />
         <exactMethodMatcher methodName="ExecuteXmlReader" />
@@ -77,9 +85,15 @@
     </tracerFactory>
 
     <!-- DataReader methods. DISABLED by default due to possible performance impact. Set enabled to "true" (or omit completely) to enable this instrumentation. -->
-    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.Sql.DataReaderTracerFactory" level="1" enabled="false">
-      <!-- built in MS SQL driver -->
+    <tracerFactory enabled="false">
+      <!-- built in MS SQL driver (framework) -->
       <match assemblyName="System.Data" className="System.Data.SqlClient.SqlDataReader">
+        <exactMethodMatcher methodName="NextResult" />
+        <exactMethodMatcher methodName="Read" />
+      </match>
+
+      <!-- built in MS SQL driver (core / nuget) -->
+      <match assemblyName="System.Data.SqlClient" className="System.Data.SqlClient.SqlDataReader">
         <exactMethodMatcher methodName="NextResult" />
         <exactMethodMatcher methodName="Read" />
       </match>
@@ -127,8 +141,13 @@
 
     <!-- DbConnection.Open() -->
     <tracerFactory>
-      <!-- built in MS SQL driver -->
+      <!-- built in MS SQL driver (framework) -->
       <match assemblyName="System.Data" className="System.Data.SqlClient.SqlConnection,System.Data.Odbc.OdbcConnection,System.Data.OleDb.OleDbConnection">
+        <exactMethodMatcher methodName="Open" />
+      </match>
+
+      <!-- built in MS SQL driver (core / nuget) -->
+      <match assemblyName="System.Data.SqlClient" className="System.Data.SqlClient.SqlConnection">
         <exactMethodMatcher methodName="Open" />
       </match>
 

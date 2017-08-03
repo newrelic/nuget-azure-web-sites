@@ -51,10 +51,6 @@ Import-Module (Join-Path $modulesPath global_config.psm1) -Force
 				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Asp.dll) | Should Be $true
 			}
 			
-			It "checks to see if content\newrelic\extensions\NewRelic.Providers.TransactionContext.Default.dll" {
-				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Default.dll) | Should Be $true
-			}
-			
 			It "checks to see if content\newrelic\extensions\NewRelic.Providers.TransactionContext.Wcf3.dll" {
 				(Test-Path $PackageRoot\content\newrelic\extensions\NewRelic.Providers.TransactionContext.Wcf3.dll) | Should Be $true
 			}

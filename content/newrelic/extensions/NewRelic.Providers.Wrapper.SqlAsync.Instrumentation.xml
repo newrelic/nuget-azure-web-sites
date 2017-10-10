@@ -27,6 +27,7 @@
       <!-- Npgsql Postgres data provider -->
       <match assemblyName="Npgsql" className="Npgsql.NpgsqlCommand">
         <exactMethodMatcher methodName="ExecuteAsync"/>
+        <exactMethodMatcher methodName="Execute" parameters="System.Data.CommandBehavior,System.Boolean,System.Threading.CancellationToken" />
       </match>
     </tracerFactory>
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>NewRelic.Azure.WebSites</id>
-    <version>6.17.387.0</version>
+    <version>6.18.139.0</version>
     <title>New Relic for Windows Azure Web Sites (x86)</title>
     <authors>Nick Floyd</authors>
     <owners>New Relic</owners>

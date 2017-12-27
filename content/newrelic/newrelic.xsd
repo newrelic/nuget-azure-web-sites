@@ -797,7 +797,7 @@
 							</xs:annotation>
 						</xs:attribute>
 
-						<xs:attribute name="explainEnabled" type="xs:boolean" default="true">
+						<xs:attribute name="explainEnabled" type="xs:boolean" default="false">
 							<xs:annotation>
 								<xs:documentation>
 									This determines whether the agent will capture query plans for slow SQL queries.
@@ -1282,6 +1282,79 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
+
+					<xs:element name="utilization" minOccurs="0" maxOccurs="1" >
+						<xs:annotation>
+							<xs:documentation>
+								Elements under utilization allow you to configure the gathering of utilization and pricing information by agents during connect.
+							</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:attribute name="detectAws" type="xs:boolean" default="true"  use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    This attribute controls whether to poll the AWS metadata endpoint (optional). The default is true.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							
+							<xs:attribute name="detectAzure" type="xs:boolean" default="true"  use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    This attribute controls whether to poll the Azure metadata endpoint (optional). The default is true.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+
+              <xs:attribute name="detectGcp" type="xs:boolean" default="true"  use="optional">
+                <xs:annotation>
+                  <xs:documentation>
+                    This attribute controls whether to poll the Google Cloud Platform metadata endpoint (optional). The default is true.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+
+							<xs:attribute name="detectPcf" type="xs:boolean" default="true"  use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    This attribute controls whether to look for Pivotal Cloud Foundry environment variables (optional). The default is true.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+
+							<xs:attribute name="detectDocker" type="xs:boolean" default="true"  use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    This attribute controls whether to attempt reading the proc/self/cgroup file for Docker (optional). The default is true.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+
+							<xs:attribute name="logicalProcessors" type="xs:int" use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    The value of this attribute is the total number of hyper-threaded execution contexts available (optional).
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+
+							<xs:attribute name="totalRamMib" type="xs:int" use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    The value of this attribute represents the total amount of memory available to the host, not the process, in mebibytes (1024 squared or 1,048,576 bytes)  (optional).
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+
+							<xs:attribute name="billingHost" type="xs:string" use="optional">
+								<xs:annotation>
+									<xs:documentation>
+                    The value of this attribute is the server name you have configured (optional).  This may be differnet from the actual server hostname.
+                  </xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
 			</xs:all>
 
 			<xs:attribute name="agentEnabled" type="xs:boolean" default="true">
